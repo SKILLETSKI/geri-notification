@@ -4,9 +4,17 @@
         <servlet-name>BootstrapServlet</servlet-name>
         <servlet-class>geriapp.servlets.BootstrapServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>FetchServlet</servlet-name>
+        <servlet-class>geriapp.servlets.MedboxServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BootstrapServlet</servlet-name>
         <url-pattern>/Bootstrap</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MedboxServlet</servlet-name>
+        <url-pattern>/MedboxIn</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
