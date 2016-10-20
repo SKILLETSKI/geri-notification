@@ -10,13 +10,5 @@ package geriapp.entity.reading;
  * @author muhammadims.2013
  */
 public class Reading {
-    private int deviceId;
 
-    public int getDeviceId() {
-        return deviceId;
-    }
-
-    public void setDeviceId(int deviceId) {
-        this.deviceId = deviceId;
-    }
 }

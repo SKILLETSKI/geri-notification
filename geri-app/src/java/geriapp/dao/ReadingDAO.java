@@ -27,8 +27,12 @@ public class ReadingDAO {
         
         if (reading instanceof MedboxReading) {
             newColl = db.getCollection("Medbox");
-            Document medboxReading = new Document("deviceId",reading.getDeviceId());
-            medboxReading.append("key", "value");
+            Document medboxReading = new Document("gw_id", ((MedboxReading) reading).getGw_id());
+            medboxReading.append("server_timestamp",((MedboxReading) reading).getServer_timestamp().toString());
+            medboxReading.append("sequence",((MedboxReading) reading).getSequence());
+            medboxReading.append("gw_timestamp",((MedboxReading) reading).getGw_timestamp().toString());
+            medboxReading.append("sensor_id",((MedboxReading) reading).getSensor_id());
+            medboxReading.append("reed_val",((MedboxReading) reading).getReed_val());
             //TODO: append reading attributes
         }
     }
