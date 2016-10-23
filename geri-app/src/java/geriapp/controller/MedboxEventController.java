@@ -9,6 +9,7 @@ import geriapp.dao.ReadingDAO;
 import geriapp.entity.reading.Reading;
 import geriapp.entity.rule.MedboxRule;
 import geriapp.thread.MedboxReadThread;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -42,7 +43,19 @@ public class MedboxEventController {
         return latestMedboxReadings.size();
     }
     
-    public boolean soundAlarm(int numOfReadings,int numExpected) {
-        return true;
+    public boolean soundAlarm(int numOpened,int numExpected) {
+        if (numOpened < numExpected) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    public void setMedboxRule(int patientId, int threshold, Timestamp timestamp, int numOfTakes, int numOfMissed) {
+        medboxRule.setPatientId(patientId);
+        medboxRule.setThreshold(threshold);
+        medboxRule.setTimestamp(timestamp);
+        medboxRule.setNumOfTakes(numOfTakes);
+        medboxRule.setNumOfMissed(numOfMissed);
     }
 }
