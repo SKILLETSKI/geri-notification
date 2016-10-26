@@ -1,10 +1,17 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Twilio;
 
-package Twillio;
-import com.twilio.http.TwilioRestClient;
 /**
  *
- * @author Thiara
+ * @author AvinashDash
  */
+import com.twilio.http.TwilioRestClient;
+import com.twilio.base.Resource;
+
 public class Client {
     private Credentials credentials;
     private TwilioMessageCreator messageCreator;

@@ -1,22 +1,22 @@
-package Twillio;
+package Twilio;
 
 
 import com.google.gson.Gson;
-import com.twilio.notifications.domain.Administrator;
+
 import org.springframework.stereotype.Service;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 
 @Service
-public class AdminstatorService {
+public class AdministratorService {
     private String filePath;
 
-    public AdminstatorService() {
-        this.filePath = getClass().getClassLoader().getResource("administrators.json").getPath();
+    public AdministratorService() {
+        this.filePath = getClass().getClassLoader().getResource("Administrator.json").getPath();
     }
 
-    public AdminstatorService(String filePath) {
+    public AdministratorService(String filePath) {
         this.filePath = filePath;
     }
 
