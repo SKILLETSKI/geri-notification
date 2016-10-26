@@ -5,7 +5,7 @@
         <servlet-class>geriapp.servlets.BootstrapServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>FetchServlet</servlet-name>
+        <servlet-name>MedboxServlet</servlet-name>
         <servlet-class>geriapp.servlets.MedboxServlet</servlet-class>
     </servlet>
     <servlet-mapping>

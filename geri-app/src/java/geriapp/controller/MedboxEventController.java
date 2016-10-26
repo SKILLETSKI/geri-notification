@@ -23,6 +23,7 @@ public class MedboxEventController {
     private MedboxRule medboxRule = new MedboxRule();
     private ReadingDAO readingDAO = new ReadingDAO();
     private MedboxReadThread mbReadThread = new MedboxReadThread();
+    private ArrayList<Reading> latestMedboxReadings = new ArrayList<Reading>();
     //consider adding a Medbox class for different medboxes
 
     public int startTimer() {
@@ -30,32 +31,41 @@ public class MedboxEventController {
         long elapsedTime = 0;
         Thread medboxTimerThread = new Thread(mbReadThread);
         medboxTimerThread.start();
-        ArrayList<Reading> latestMedboxReadings = new ArrayList<Reading>();
 
         while (elapsedTime < medboxRule.getThreshold()) {
             Reading reading = mbReadThread.getMbReading();
-            if(!latestMedboxReadings.contains(reading) && reading != null) {
+            if (!latestMedboxReadings.contains(reading) && reading != null) {
                 latestMedboxReadings.add(reading);
             }
             elapsedTime = (new Date()).getTime() - startTime;
         } //TODO: identify unique readings and place into ArrayList
-        
+
         return latestMedboxReadings.size();
     }
-    
-    public boolean soundAlarm(int numOpened,int numExpected) {
-        if (numOpened < numExpected) {
-            return true;
+
+    public boolean soundAlarm() {
+        if (latestMedboxReadings != null && !latestMedboxReadings.isEmpty()) {
+            int numOpened = latestMedboxReadings.size();
+            int numExpected = medboxRule.getNumSupposedToTake();
+            int numCanMiss = medboxRule.getNumCanMiss();
+            int numMissed = numExpected - numOpened;
+            
+            if (numMissed > numCanMiss) {
+                //create alert
+                return true;
+            } else {
+                return false;
+            }
         } else {
             return false;
         }
     }
-    
+
     public void setMedboxRule(int patientId, int threshold, Timestamp timestamp, int numOfTakes, int numOfMissed) {
         medboxRule.setPatientId(patientId);
         medboxRule.setThreshold(threshold);
         medboxRule.setTimestamp(timestamp);
-        medboxRule.setNumOfTakes(numOfTakes);
-        medboxRule.setNumOfMissed(numOfMissed);
+        medboxRule.setNumSupposedToTake(numOfTakes);
+        medboxRule.setNumCanMiss(numOfMissed);
     }
 }

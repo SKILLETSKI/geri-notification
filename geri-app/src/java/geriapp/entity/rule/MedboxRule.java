@@ -17,15 +17,15 @@ public class MedboxRule {
     private int threshold; //within x milliseconds
     private Timestamp timestamp; //starting time
     private ArrayList<Timestamp> boxOpened; //timestamp when opened
-    private int numOfTakes; //
-    private int numOfMissed;
+    private int numSupposedToTake; //
+    private int numCanMiss;
 
-    public int getNumOfMissed() {
-        return numOfMissed;
+    public int getNumCanMiss() {
+        return numCanMiss;
     }
 
-    public void setNumOfMissed(int numOfMissed) {
-        this.numOfMissed = numOfMissed;
+    public void setNumCanMiss(int numOfMissed) {
+        this.numCanMiss = numOfMissed;
     }
 
     public ArrayList<Timestamp> getBoxOpened() {
@@ -60,12 +60,12 @@ public class MedboxRule {
         this.timestamp = timestamp;
     }
 
-    public int getNumOfTakes() {
-        return numOfTakes;
+    public int getNumSupposedToTake() {
+        return numSupposedToTake;
     }
 
-    public void setNumOfTakes(int numOfTakes) {
-        this.numOfTakes = numOfTakes;
+    public void setNumSupposedToTake(int numOfTakes) {
+        this.numSupposedToTake = numOfTakes;
     }
     
 }
