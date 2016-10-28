@@ -39,7 +39,8 @@ public class MedboxEventController {
             }
             elapsedTime = (new Date()).getTime() - startTime;
         } //TODO: identify unique readings and place into ArrayList
-
+        
+        mbReadThread.setRun(false);
         return latestMedboxReadings.size();
     }
 

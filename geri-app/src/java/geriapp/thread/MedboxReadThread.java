@@ -15,10 +15,11 @@ import geriapp.entity.reading.MedboxReading;
 public class MedboxReadThread implements Runnable {
     
     MedboxReading mbReading = null;
+    private boolean run = true;
     
     @Override
     public void run() {
-        while(true) {
+        while(run) {
             mbReading = (MedboxReading) ReadingDAO.getLatestReading("medbox");
         }
     }
@@ -26,5 +27,8 @@ public class MedboxReadThread implements Runnable {
     public MedboxReading getMbReading() {
         return mbReading;
     }
-    
+
+    public void setRun(boolean run) {
+        this.run = run;
+    }
 }
