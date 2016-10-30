@@ -5,6 +5,7 @@
  */
 package geriapp.controller;
 
+import geriapp.dao.MedboxEventDAO;
 import geriapp.dao.ReadingDAO;
 import geriapp.entity.reading.Reading;
 import geriapp.entity.rule.MedboxRule;
@@ -53,6 +54,7 @@ public class MedboxEventController {
             
             if (numMissed > numCanMiss) {
                 //create alert
+                //send SMS
                 return true;
             } else {
                 return false;
@@ -62,11 +64,12 @@ public class MedboxEventController {
         }
     }
 
-    public void setMedboxRule(int patientId, int threshold, Timestamp timestamp, int numOfTakes, int numOfMissed) {
+    public void setMedboxRule(String patientId, int threshold, int numOfTakes, int numOfMissed) {
         medboxRule.setPatientId(patientId);
         medboxRule.setThreshold(threshold);
-        medboxRule.setTimestamp(timestamp);
         medboxRule.setNumSupposedToTake(numOfTakes);
         medboxRule.setNumCanMiss(numOfMissed);
+        //comment this out if you are not using database
+        MedboxEventDAO.createNewMedboxEvent(patientId, threshold, numOfTakes, numOfMissed);
     }
 }

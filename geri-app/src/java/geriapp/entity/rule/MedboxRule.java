@@ -13,12 +13,19 @@ import java.util.ArrayList;
  * @author muhammadims.2013
  */
 public class MedboxRule {
-    private int patientId;
+    private String patientId;
     private int threshold; //within x milliseconds
-    private Timestamp timestamp; //starting time
-    private ArrayList<Timestamp> boxOpened; //timestamp when opened
     private int numSupposedToTake; //
     private int numCanMiss;
+    private int medboxEventId;
+
+    public int getMedboxEventId() {
+        return medboxEventId;
+    }
+
+    public void setMedboxEventId(int medboxEventId) {
+        this.medboxEventId = medboxEventId;
+    }
 
     public int getNumCanMiss() {
         return numCanMiss;
@@ -28,19 +35,11 @@ public class MedboxRule {
         this.numCanMiss = numOfMissed;
     }
 
-    public ArrayList<Timestamp> getBoxOpened() {
-        return boxOpened;
-    }
-
-    public void setBoxOpened(Timestamp boxOpened) {
-        this.boxOpened.add(boxOpened);
-    }
-
-    public int getPatientId() {
+    public String getPatientId() {
         return patientId;
     }
 
-    public void setPatientId(int patientId) {
+    public void setPatientId(String patientId) {
         this.patientId = patientId;
     }
 
@@ -50,14 +49,6 @@ public class MedboxRule {
 
     public void setThreshold(int threshold) {
         this.threshold = threshold;
-    }
-
-    public Timestamp getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(Timestamp timestamp) {
-        this.timestamp = timestamp;
     }
 
     public int getNumSupposedToTake() {
