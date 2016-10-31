@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Twilio;
+package geriapp.Twilio;
 
 import com.twilio.http.TwilioRestClient;
 import com.twilio.base.Resource;

@@ -10,6 +10,9 @@ import geriapp.dao.ReadingDAO;
 import geriapp.entity.reading.Reading;
 import geriapp.entity.rule.MedboxRule;
 import geriapp.thread.MedboxReadThread;
+import geriapp.Twilio.TwilioMessageCreator;
+import com.twilio.http.TwilioRestClient.Builder;
+import com.twilio.http.TwilioRestClient;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
@@ -25,6 +28,8 @@ public class MedboxEventController {
     private ReadingDAO readingDAO = new ReadingDAO();
     private MedboxReadThread mbReadThread = new MedboxReadThread();
     private ArrayList<Reading> latestMedboxReadings = new ArrayList<Reading>();
+    private Builder twilioClientBuilder = new Builder("ekthiara.2013@sis.smu.edu.sg", "S9009336c");
+    
     //consider adding a Medbox class for different medboxes
 
     public int startTimer() {
@@ -55,6 +60,11 @@ public class MedboxEventController {
             if (numMissed > numCanMiss) {
                 //create alert
                 //send SMS
+                
+                TwilioRestClient twilioClient = twilioClientBuilder.build();
+                TwilioMessageCreator messageCreator = new TwilioMessageCreator(twilioClient);
+                //messageCreator.create();
+                //Needs to be configured with deployment URL
                 return true;
             } else {
                 return false;

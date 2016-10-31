@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Twilio;
+package geriapp.Twilio;
 
 /**
  *
  * @author AvinashDash
  */
 
-import Twilio.*;
+
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
