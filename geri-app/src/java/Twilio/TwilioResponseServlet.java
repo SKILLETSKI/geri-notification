@@ -10,6 +10,7 @@ package Twilio;
  * @author AvinashDash
  */
 
+import Twilio.*;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -26,19 +27,24 @@ public class TwilioResponseServlet extends HttpServlet {
     // service() responds to both GET and POST requests.
     
     public void service(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        // Create a dict of people we know.
-        HashMap<String, String> callers = new HashMap<>();
-        callers.put("+6586568835", "Dash");
-
+        /*
+            The next 2 lines need to be replaced by a query to match the phone number of the incoming
+            message to the list of users' phone numbers
+        */
+     
+        HashMap<String, String> groupMembers = new HashMap<>(); //Populate with group members' details
+        groupMembers.put("+6586568835", "Dash");
+        
         String fromNumber = request.getParameter("From"); //This gets the number which the message was received from
-        String knownCaller = callers.get(fromNumber);
+        String isGroupMember = groupMembers.get(fromNumber); //Needs to be replaced by a code to verify the user 
         String message;
-        if (knownCaller == null) {
-            // Use a generic message
-            message = "Monkey, thanks for the message!";
+        if (isGroupMember == null) {
+            
+            //Need to add in logic to verify what message is being responded to
+            message = "We have received your request";
         } else {
             // Use the caller's name
-            message = knownCaller + ", thanks for the message!";
+            message = "Sorry, we do not recognize your phone number";
         }
 
         MessagingResponse twiml = new MessagingResponse.Builder()

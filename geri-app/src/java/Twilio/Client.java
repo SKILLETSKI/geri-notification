@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Twillio;
+package Twilio;
 
 import com.twilio.http.TwilioRestClient;
 import com.twilio.base.Resource;
