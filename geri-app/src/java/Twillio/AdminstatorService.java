@@ -2,7 +2,6 @@ package Twillio;
 
 
 import com.google.gson.Gson;
-import com.twilio.notifications.domain.Administrator;
 import org.springframework.stereotype.Service;
 
 import java.io.FileNotFoundException;
