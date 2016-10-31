@@ -11,6 +11,7 @@ import geriapp.entity.reading.Reading;
 import geriapp.entity.rule.MedboxRule;
 import geriapp.thread.MedboxReadThread;
 import geriapp.Twilio.TwilioMessageCreator;
+import geriapp.Twilio.Credential;
 import com.twilio.http.TwilioRestClient.Builder;
 import com.twilio.http.TwilioRestClient;
 import java.sql.Timestamp;
@@ -29,6 +30,7 @@ public class MedboxEventController {
     private MedboxReadThread mbReadThread = new MedboxReadThread();
     private ArrayList<Reading> latestMedboxReadings = new ArrayList<Reading>();
     private Builder twilioClientBuilder = new Builder("ekthiara.2013@sis.smu.edu.sg", "S9009336c");
+    private Credential twilioCredentials = new Credential();
     
     //consider adding a Medbox class for different medboxes
 
@@ -63,8 +65,11 @@ public class MedboxEventController {
                 
                 TwilioRestClient twilioClient = twilioClientBuilder.build();
                 TwilioMessageCreator messageCreator = new TwilioMessageCreator(twilioClient);
-                //messageCreator.create();
-                //Needs to be configured with deployment URL
+                
+                //Needs to be configured with deployment URL | Add in input phone number
+                //Add in a parse JSON for the message content
+                //messageCreator.create(twilioCredentials.getAccountSid(), "+6586568835", twilioCredentials.getMessagingServiveSid, "Patient not taking medicine");
+                
                 return true;
             } else {
                 return false;

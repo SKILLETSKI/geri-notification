@@ -14,6 +14,7 @@ public class Credential {
     private final String AccountSid = "ACec01a875b5cc448f2b2e903087059d29";
     private final String AuthToken = "16f2063d70f35433fb14a141c308becf";
     private final String PhoneNumber = admin.getPhoneNumber();
+    private final String messagingServiceSid = "";
     
     public String getAccountSid(){
         return this.AccountSid;
@@ -25,5 +26,9 @@ public class Credential {
     
     public String getPhoneNumber(){
         return this.PhoneNumber;
+    }
+    
+    public String getMesagingServiceSid(){
+        return this.messagingServiceSid;
     }
 }
