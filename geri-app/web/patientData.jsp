@@ -1,14 +1,13 @@
 <%-- 
-    Document   : home
-    Created on : Nov 2, 2016, 3:44:55 AM
+    Document   : patientData
+    Created on : Nov 3, 2016, 12:33:04 AM
     Author     : ASUS
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Gerification | Homepage</title>
+    <title>Gerification | Patients Data</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -46,9 +45,6 @@
         </div>
         <!--END THEME SETTING-->
         <!--BEGIN BACK TO TOP-->
-        <a id="totop" href="#"><i class="fa fa-angle-up"></i></a>
-        <!--END BACK TO TOP-->
-        <!--BEGIN TOPBAR-->
         <div id="header-topbar-option-demo" class="page-header-topbar">
             <nav id="topbar" role="navigation" style="margin-bottom: 0;" data-step="3" class="navbar navbar-default navbar-static-top">
             <div class="navbar-header">
@@ -146,21 +142,18 @@
                 </ul>
             </div>
         </nav>
-            <!--END SIDEBAR MENU-->
-            <!--BEGIN CHAT FORM-->
-            <!--END CHAT FORM-->
-            <!--BEGIN PAGE WRAPPER-->
             <div id="page-wrapper">
                 <!--BEGIN TITLE & BREADCRUMB PAGE-->
                 <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
                     <div class="page-header pull-left">
                         <div class="page-title">
-                            Dashboard</div>
+                            Patients Data</div>
                     </div>
                     <ol class="breadcrumb page-breadcrumb pull-right">
-                        <li><i class="fa fa-home"></i>&nbsp;<a href="home.jsp">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                        <li class="hidden"><a href="#">Dashboard</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                        <li class="active">Dashboard</li>
+                        <li><i class="fa fa-home"></i>&nbsp;<a href="home.jsp">Home</a>&nbsp;&nbsp;<i
+                            class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                        <li class="hidden"><a href="#">Forms</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                        <li class="active">Patients Data</li>
                     </ol>
                     <div class="clearfix">
                     </div>
@@ -169,81 +162,65 @@
                 <!--BEGIN CONTENT-->
                 <div class="page-content">
                     <div id="tab-general">
-                        <div id="sum_box" class="row mbl">
-                            <div class="col-sm-6 col-md-3">
-                                <div class="panel profit db mbm">
-                                    <div class="panel-body">
-                                        <p class="icon">
-                                            
-                                        </p>
-                                        <h4 class="value">
-                                            </h4>
-                                        <p class="description">
-                                            Notification</p>
-                                        <div class="progress progress-sm mbn">
-                                            <div role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"
-                                                style="width: 80%;" class="progress-bar progress-bar-success">
-                                                <span class="sr-only">80% Complete (success)</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-md-3">
-                                <div class="panel income db mbm">
-                                    <div class="panel-body">
-                                        <p class="icon">
-                                            
-                                        </p>
-                                        <h4 class="value">
-                                            </h4>
-                                        <p class="description">
-                                            Notification</p>
-                                        <div class="progress progress-sm mbn">
-                                            <div role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"
-                                                style="width: 80%;" class="progress-bar progress-bar-success">
-                                                <span class="sr-only">80% Complete (success)</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-md-3">
-                                <div class="panel task db mbm">
-                                    <div class="panel-body">
-                                        <p class="icon">
-                                            
-                                        </p>
-                                        <h4 class="value">
-                                            </h4>
-                                        <p class="description">
-                                            Notification</p>
-                                        <div class="progress progress-sm mbn">
-                                            <div role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"
-                                                style="width: 80%;" class="progress-bar progress-bar-success">
-                                                <span class="sr-only">80% Complete (success)</span></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-md-3">
-                                <div class="panel visit db mbm">
-                                    <div class="panel-body">
-                                        <p class="icon">
-                                            
-                                        </p>
-                                        <h4 class="value">
-                                            </h4>
-                                        <p class="description">
-                                            Notification</p>
-                                        <div class="progress progress-sm mbn">
-                                            <div role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"
-                                                style="width: 80%;" class="progress-bar progress-bar-success">
-                                                <span class="sr-only">80% Complete (success)</span></div>
-                                        </div>
-                                    </div>
-                                </div>
+                        <div class="row mbl">
+     
+                            <div class="col-lg-12">
+                            <div class="row">
+                    <div class="col-lg-3">
+                    </div>    
+                    <div class="col-lg-6">
+                        <div class="panel panel-violet">
+                            <div class="panel-heading">Patients Details</div>
+                            <div class="panel-body">
+                                <table class="table table-hover table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Name</th>
+                                        <th>Age</th>
+                                        <th>Status</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td><a href="medbox.jsp">Tommy Tan</a></td>
+                                        <td>77</td>
+                                        <td><span class="label label-sm label-success">Very Healthy</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>John Bravo</td>
+                                        <td>60</td>
+                                        <td><span class="label label-sm label-info">Healthy</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>Larry Koh</td>
+                                        <td>66</td>
+                                        <td><span class="label label-sm label-warning">Fever</span></td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>Susan Wong</td>
+                                        <td>62</td>
+                                        <td><span class="label label-sm label-danger">Kidney Failure</span></td>
+                                    </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
-                 
+                        
+                        
+                        
+                        
+                    </div>
+                </div>
+                            
+                            
+                            </div>
+                            
+                        </div>
                     </div>
                 </div>
                 <!--END CONTENT-->

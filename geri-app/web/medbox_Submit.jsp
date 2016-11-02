@@ -1,14 +1,18 @@
 <%-- 
-    Document   : home
-    Created on : Nov 2, 2016, 3:44:55 AM
+    Document   : medbox
+    Created on : Nov 2, 2016, 4:57:52 AM
     Author     : ASUS
 --%>
+
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.Timer"%>
+<%@page import="java.util.TimerTask"%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Gerification | Homepage</title>
+    <title>Gerification | Medbox</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,7 +34,53 @@
     <link type="text/css" rel="stylesheet" href="styles/pace.css">
     <link type="text/css" rel="stylesheet" href="styles/jquery.news-ticker.css">
 </head>
+<script type="text/javascript">
+// set minutes
+var mins = 1;
+ 
+// calculate the seconds (don't change this! unless time progresses at a different speed for you...)
+var secs = mins * 60;
+function countdown() {
+	setTimeout('Decrement()',1000);
+       
+}
+function Decrement() {
+	if (document.getElementById) {
+		//minutes = document.getElementById("minutes");
+		seconds = document.getElementById("seconds");
+		// if less than a minute remaining
+		if (seconds < 59) {
+			seconds.value = secs;
+		} else {
+			minutes.value = getminutes();
+			seconds.value = getseconds();
+		}
+		secs--;
+		setTimeout('Decrement()',1000);
+	}
+}
+function getminutes() {
+	// minutes is seconds divided by 60, rounded down
+	mins = Math.floor(secs / 60);
+	return mins;
+}
+function getseconds() {
+	// take mins remaining (as seconds) away from total seconds remaining
+	return secs-Math.round(mins *60);
+}
+</script>
 <body>
+<script>
+countdown();
+</script>
+    <%
+        ArrayList<String> valuesList = (ArrayList<String>) session.getAttribute("values");
+        String patientId = valuesList.get(0);
+        String thresholdNo = valuesList.get(1);
+        String NumDosage =  valuesList.get(2);
+        String NumMissed =  valuesList.get(3);
+      
+    %>
     <div>
         <!--BEGIN THEME SETTING-->
         <div id="theme-setting">
@@ -46,9 +96,6 @@
         </div>
         <!--END THEME SETTING-->
         <!--BEGIN BACK TO TOP-->
-        <a id="totop" href="#"><i class="fa fa-angle-up"></i></a>
-        <!--END BACK TO TOP-->
-        <!--BEGIN TOPBAR-->
         <div id="header-topbar-option-demo" class="page-header-topbar">
             <nav id="topbar" role="navigation" style="margin-bottom: 0;" data-step="3" class="navbar navbar-default navbar-static-top">
             <div class="navbar-header">
@@ -128,7 +175,6 @@
                 data-position="right" class="navbar-default navbar-static-side">
             <div class="sidebar-collapse menu-scroll">
                 <ul id="side-menu" class="nav">
-                    
                      <div class="clearfix"></div>
                     <li class="active"><a href="dashboard.html"><i class="fa fa-tachometer fa-fw">
                         <div class="icon-bg bg-orange"></div>
@@ -146,21 +192,18 @@
                 </ul>
             </div>
         </nav>
-            <!--END SIDEBAR MENU-->
-            <!--BEGIN CHAT FORM-->
-            <!--END CHAT FORM-->
-            <!--BEGIN PAGE WRAPPER-->
             <div id="page-wrapper">
                 <!--BEGIN TITLE & BREADCRUMB PAGE-->
                 <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
                     <div class="page-header pull-left">
                         <div class="page-title">
-                            Dashboard</div>
+                            Medication Box Rule</div>
                     </div>
                     <ol class="breadcrumb page-breadcrumb pull-right">
-                        <li><i class="fa fa-home"></i>&nbsp;<a href="home.jsp">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                        <li class="hidden"><a href="#">Dashboard</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                        <li class="active">Dashboard</li>
+                        <li><i class="fa fa-home"></i>&nbsp;<a href="dashboard.html">Home</a>&nbsp;&nbsp;<i
+                            class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                        <li class="hidden"><a href="#">Forms</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                        <li class="active">Medication Box Rule</li>
                     </ol>
                     <div class="clearfix">
                     </div>
@@ -169,81 +212,85 @@
                 <!--BEGIN CONTENT-->
                 <div class="page-content">
                     <div id="tab-general">
-                        <div id="sum_box" class="row mbl">
-                            <div class="col-sm-6 col-md-3">
-                                <div class="panel profit db mbm">
-                                    <div class="panel-body">
-                                        <p class="icon">
-                                            
-                                        </p>
-                                        <h4 class="value">
-                                            </h4>
-                                        <p class="description">
-                                            Notification</p>
-                                        <div class="progress progress-sm mbn">
-                                            <div role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"
-                                                style="width: 80%;" class="progress-bar progress-bar-success">
-                                                <span class="sr-only">80% Complete (success)</span></div>
-                                        </div>
+                        <div class="row mbl">
+                            <div class="col-lg-12">
+                                <div class="col-md-12">
+                                    <div id="area-chart-spline" style="width: 100%; height: 300px; display: none;">
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-6 col-md-3">
-                                <div class="panel income db mbm">
-                                    <div class="panel-body">
-                                        <p class="icon">
-                                            
-                                        </p>
-                                        <h4 class="value">
-                                            </h4>
-                                        <p class="description">
-                                            Notification</p>
-                                        <div class="progress progress-sm mbn">
-                                            <div role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"
-                                                style="width: 80%;" class="progress-bar progress-bar-success">
-                                                <span class="sr-only">80% Complete (success)</span></div>
-                                        </div>
+                            <div class="col-lg-12">
+                                <div class="row">
+                                    <div class="col-lg-4">
+                               
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-md-3">
-                                <div class="panel task db mbm">
-                                    <div class="panel-body">
-                                        <p class="icon">
-                                            
-                                        </p>
-                                        <h4 class="value">
-                                            </h4>
-                                        <p class="description">
-                                            Notification</p>
-                                        <div class="progress progress-sm mbn">
-                                            <div role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"
-                                                style="width: 80%;" class="progress-bar progress-bar-success">
-                                                <span class="sr-only">80% Complete (success)</span></div>
+                                    <div class="col-lg-4">
+                                        <div class="panel panel-yellow">
+                                            <div class="panel-heading">
+                                                Medication Rule - Timer
+                                            </div>
+
+                                            <div class="panel-body pan">
+                                                <form action="#" class="form-horizontal">
+                                                <div class="form-body pal">
+                                                    <div class="form-group">
+                                                        <label for="patientId" class="col-md-3 control-label">
+                                                            Patient Id</label>
+                                                        <div class="col-md-9">
+                                                            <div class="input-icon right">
+                                                                <label name="patientId" placeholder="" class="form-control"><%=patientId%></label></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="thresholdNo" class="col-md-3 control-label">
+                                                            Threshold (hours)</label>
+                                                        <div class="col-md-9">
+                                                            <div class="input-icon right">
+                                                                <label name="thresholdNo" placeholder="" class="form-control"><%=thresholdNo%></label></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="NumDosage" class="col-md-3 control-label">
+                                                            No.  of Dosage</label>
+                                                        <div class="col-md-9">
+                                                            <div class="input-icon right">
+                                                                <label name="NumDosage" placeholder="" class="form-control"><%=NumDosage%></label></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="NumMissed" class="col-md-3 control-label">
+                                                            No. of Missed</label>
+                                                        <div class="col-md-9">
+                                                            <div class="input-icon right">
+                                                                <label name="NumMissed" placeholder="" class="form-control"><%=NumMissed%></label></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                    <div class="col-md-12">
+                                                       
+                                                        <div id="timer"> 
+                                                            This is only valid for the next <input id="minutes" type="text" /> minutes and <input id="seconds" type="text" /> seconds.
+                                                        </div>
+                                                       
+                                                        
+                                                    </div>
+                                                </div>
+                                                </div>
+                                                
+                                               
+                                                </form>
+                                            </div>
                                         </div>
+                                        
+                                        
                                     </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-md-3">
-                                <div class="panel visit db mbm">
-                                    <div class="panel-body">
-                                        <p class="icon">
-                                            
-                                        </p>
-                                        <h4 class="value">
-                                            </h4>
-                                        <p class="description">
-                                            Notification</p>
-                                        <div class="progress progress-sm mbn">
-                                            <div role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"
-                                                style="width: 80%;" class="progress-bar progress-bar-success">
-                                                <span class="sr-only">80% Complete (success)</span></div>
-                                        </div>
+                                    <div class="col-lg-4">
+                                        
+                                        
                                     </div>
                                 </div>
                             </div>
                         </div>
-                 
                     </div>
                 </div>
                 <!--END CONTENT-->
@@ -310,5 +357,6 @@
 
 
 </script>
+
 </body>
 </html>

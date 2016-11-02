@@ -70,7 +70,7 @@
                     <li class="dropdown"><a data-hover="dropdown" href="#" class="dropdown-toggle"><i class="fa fa-tasks fa-fw"></i></a>
                         
                     </li>
-                    <li class="dropdown topbar-user"><a data-hover="dropdown" href="#" class="dropdown-toggle"><img src="images/avatar/48.jpg" alt="" class="img-responsive img-circle"/>&nbsp;<span class="hidden-xs">Tommy Tan</span>&nbsp;<span class="caret"></span></a>
+                    <li class="dropdown topbar-user"><a data-hover="dropdown" href="#" class="dropdown-toggle"><img src="images/avatar/48.jpg" alt="" class="img-responsive img-circle"/>&nbsp;<span class="hidden-xs">Jessica Bong</span>&nbsp;<span class="caret"></span></a>
                         <ul class="dropdown-menu dropdown-user pull-right">
                             <li><a href="#"><i class="fa fa-user"></i>My Profile</a></li>
                             <li><a href="#"><i class="fa fa-calendar"></i>My Calendar</a></li>
@@ -130,9 +130,9 @@
                     <li class="active"><a href="dashboard.html"><i class="fa fa-tachometer fa-fw">
                         <div class="icon-bg bg-orange"></div>
                     </i><span class="menu-title">Dashboard</span></a></li>
-                    <li><a href="Layout.html"><i class="fa fa-desktop fa-fw">
+                    <li><a href="patientData.jsp"><i class="fa fa-desktop fa-fw">
                         <div class="icon-bg bg-pink"></div>
-                    </i><span class="menu-title">Patients</span></a>
+                    </i><span class="menu-title">Patients Data</span></a>
                        
                     </li>
                     <li><a href="medbox.jsp"><i class="fa fa-send-o fa-fw">
@@ -180,19 +180,19 @@
                                             <div class="panel-heading">
                                                 Medication Rule</div>
                                             <div class="panel-body pan">
-                                                <form action="#" class="form-horizontal">
+                                                <form action="medbox_process.jsp" class="form-horizontal">
                                                 <div class="form-body pal">
                                                     <div class="form-group">
                                                         <label for="patientId" class="col-md-3 control-label">
                                                             Patient Id</label>
                                                         <div class="col-md-9">
                                                             <div class="input-icon right">
-                                                                <input name="patientId" type="text" placeholder="" class="form-control" /></div>
+                                                                <input name="patientId" type="text" placeholder="" class="form-control" value="S123" /></div>
                                                         </div>
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="thresholdNo" class="col-md-3 control-label">
-                                                            Threshold</label>
+                                                            Threshold (hours)</label>
                                                         <div class="col-md-9">
                                                             <div class="input-icon right">
                                                                 <input name="thresholdNo" type="text" placeholder="" class="form-control" /></div>
