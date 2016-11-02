@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package geriapp.entity.rule;
+package geriapp.entity.event;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -12,7 +12,7 @@ import java.util.ArrayList;
  *
  * @author muhammadims.2013
  */
-public class MedboxRule {
+public class MedboxEvent {
     private String patientId;
     private int threshold; //within x milliseconds
     private int numSupposedToTake; //
