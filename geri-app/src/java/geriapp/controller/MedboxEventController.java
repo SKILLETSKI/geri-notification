@@ -8,7 +8,7 @@ package geriapp.controller;
 import geriapp.dao.MedboxEventDAO;
 import geriapp.dao.ReadingDAO;
 import geriapp.entity.reading.Reading;
-import geriapp.entity.rule.MedboxRule;
+import geriapp.entity.event.MedboxEvent;
 import geriapp.thread.MedboxReadThread;
 import geriapp.Twilio.TwilioMessageCreator;
 import geriapp.Twilio.Credential;
@@ -25,7 +25,7 @@ import java.util.HashMap;
  */
 public class MedboxEventController {
 
-    private MedboxRule medboxRule = new MedboxRule();
+    private MedboxEvent medboxEvent = new MedboxEvent();
     private ReadingDAO readingDAO = new ReadingDAO();
     private MedboxReadThread mbReadThread = new MedboxReadThread();
     private ArrayList<Reading> latestMedboxReadings = new ArrayList<Reading>();
@@ -40,7 +40,7 @@ public class MedboxEventController {
         Thread medboxTimerThread = new Thread(mbReadThread);
         medboxTimerThread.start();
 
-        while (elapsedTime < medboxRule.getThreshold()) {
+        while (elapsedTime < medboxEvent.getThreshold()) {
             Reading reading = mbReadThread.getMbReading();
             if (!latestMedboxReadings.contains(reading) && reading != null) {
                 latestMedboxReadings.add(reading);
@@ -55,8 +55,8 @@ public class MedboxEventController {
     public boolean soundAlarm() {
         if (latestMedboxReadings != null && !latestMedboxReadings.isEmpty()) {
             int numOpened = latestMedboxReadings.size();
-            int numExpected = medboxRule.getNumSupposedToTake();
-            int numCanMiss = medboxRule.getNumCanMiss();
+            int numExpected = medboxEvent.getNumSupposedToTake();
+            int numCanMiss = medboxEvent.getNumCanMiss();
             int numMissed = numExpected - numOpened;
             
             if (numMissed > numCanMiss) {
@@ -79,11 +79,11 @@ public class MedboxEventController {
         }
     }
 
-    public void setMedboxRule(String patientId, int threshold, int numOfTakes, int numOfMissed) {
-        medboxRule.setPatientId(patientId);
-        medboxRule.setThreshold(threshold);
-        medboxRule.setNumSupposedToTake(numOfTakes);
-        medboxRule.setNumCanMiss(numOfMissed);
+    public void setMedboxEvent(String patientId, int threshold, int numOfTakes, int numOfMissed) {
+        medboxEvent.setPatientId(patientId);
+        medboxEvent.setThreshold(threshold);
+        medboxEvent.setNumSupposedToTake(numOfTakes);
+        medboxEvent.setNumCanMiss(numOfMissed);
         //comment this out if you are not using database
         MedboxEventDAO.createNewMedboxEvent(patientId, threshold, numOfTakes, numOfMissed);
     }
