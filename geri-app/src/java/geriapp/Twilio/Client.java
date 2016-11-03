@@ -24,7 +24,7 @@ public class Client {
         this.messageCreator = messageCreator;
     }
 
-    public void sendMessage(String to, String message, String mediaUrl) {
-        messageCreator.create(to, credentials.getPhoneNumber(), message, mediaUrl);
+    public void sendMessage(String to, String message) {
+        messageCreator.create(to, "+447481337150", message);
     }
 }

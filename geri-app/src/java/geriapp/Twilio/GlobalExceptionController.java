@@ -20,7 +20,7 @@ public class GlobalExceptionController {
         // Send a message to the administrators when something goes unexpectedly wrong.
         Administrator[] administrators = new AdministratorService().getAdministrators();
         for (Administrator administrator : administrators) {
-            new Client().sendMessage(administrator.getPhoneNumber(), message, mediaUrl);
+            new Client().sendMessage(administrator.getPhoneNumber(), message);
         }
 
         return "Something unexpected happened. Keep calm, administrators were notified.";

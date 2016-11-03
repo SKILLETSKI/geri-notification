@@ -66,9 +66,8 @@ public class MedboxEventController {
                 TwilioRestClient twilioClient = twilioClientBuilder.build();
                 TwilioMessageCreator messageCreator = new TwilioMessageCreator(twilioClient);
                 
-                //Needs to be configured with deployment URL | Add in input phone number
-                //Add in a parse JSON for the message content
-                //messageCreator.create(twilioCredentials.getAccountSid(), "+6586568835", twilioCredentials.getMessagingServiveSid, "Patient not taking medicine");
+               
+                messageCreator.create("+6586568835", "+447481337150", "Patient not taking medicine");
                 
                 return true;
             } else {

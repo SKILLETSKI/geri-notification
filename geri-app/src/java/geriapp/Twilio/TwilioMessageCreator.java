@@ -23,7 +23,7 @@ public class TwilioMessageCreator {
         this.client = client;
     }
 
-    public Message create(String to, String from, String body, String mediaUrl) {
+    public Message create(String to, String from, String body) {
         MessageCreator messageCreator = new MessageCreator(
                 new PhoneNumber(to),
                 new PhoneNumber(from),
