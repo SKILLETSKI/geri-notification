@@ -20,7 +20,7 @@ import org.bson.Document;
 public class ReadingDAO {
     public static void storeReading(Reading reading) {
         
-        MongoClient mongo = new MongoClient("localhost", 27017);
+        MongoClient mongo = new MongoClient("54.254.204.169", 27017);
         
         MongoDatabase db = mongo.getDatabase("GERI");
         MongoCollection newColl;
