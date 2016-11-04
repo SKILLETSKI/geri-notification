@@ -10,16 +10,16 @@ import com.twilio.base.Resource;
 
 public class Client {
     private Credential credentials;
-    private TwilioMessageCreator messageCreator;
+    private MessageBuilder messageCreator;
 
     public Client() {
         this.credentials = new Credential();
-        this.messageCreator = new TwilioMessageCreator(
+        this.messageCreator = new MessageBuilder(
                 new TwilioRestClient.Builder(credentials.getAccountSid(), credentials.getAuthToken()).build()
         );
     }
 
-    public Client(TwilioMessageCreator messageCreator, Credential credentials) {
+    public Client(MessageBuilder messageCreator, Credential credentials) {
         this.credentials = credentials;
         this.messageCreator = messageCreator;
     }
