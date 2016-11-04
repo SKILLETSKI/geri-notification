@@ -20,6 +20,7 @@
 <%@page import="org.apache.commons.lang3.time.FastDateFormat"%>
 <%@page import="org.apache.commons.codec.binary.Base64"%>
 <%@page import="org.codehaus.jackson.JsonParseException"%>
+<%@page import="org.codehaus.jackson.map.JsonMappingException"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
