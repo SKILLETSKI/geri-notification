@@ -12,7 +12,8 @@ import geriapp.entity.event.MedboxEvent;
 import geriapp.thread.MedboxReadThread;
 import geriapp.Twilio.TwilioMessageCreator;
 import geriapp.Twilio.Credential;
-import com.twilio.http.TwilioRestClient.Builder;
+import geriapp.Twilio.Client;
+
 import com.twilio.http.TwilioRestClient;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -29,8 +30,12 @@ public class MedboxEventController {
     private ReadingDAO readingDAO = new ReadingDAO();
     private MedboxReadThread mbReadThread = new MedboxReadThread();
     private ArrayList<Reading> latestMedboxReadings = new ArrayList<Reading>();
-    private Builder twilioClientBuilder = new Builder("ekthiara.2013@sis.smu.edu.sg", "S9009336c");
-    private Credential twilioCredentials = new Credential();
+    
+    public Credential twilioCredentials = new Credential();
+    public TwilioMessageCreator messageCreator = new TwilioMessageCreator(new TwilioRestClient.Builder("ekthiara.2013@sis.smu.edu.sg", "S9009336c").build());
+     
+    private Client twilioClientCreator = null;
+    
     
     //consider adding a Medbox class for different medboxes
 
@@ -60,17 +65,17 @@ public class MedboxEventController {
             int numMissed = numExpected - numOpened;
             
             if (numMissed > numCanMiss) {
-                //create alert
-                //send SMS
                 
-                TwilioRestClient twilioClient = twilioClientBuilder.build();
-                TwilioMessageCreator messageCreator = new TwilioMessageCreator(twilioClient);
                 
-               
-                messageCreator.create("+6586568835", "+447481337150", "Patient not taking medicine");
+                twilioClientCreator = new Client(messageCreator, twilioCredentials);
+                twilioClientCreator.sendMessage("+6586568835", "Patient not taking medicine");
                 
                 return true;
             } else {
+                
+                twilioClientCreator = new Client(messageCreator, twilioCredentials);
+                twilioClientCreator.sendMessage("+6586568835", "Patient taking medicine as per normal");
+                
                 return false;
             }
         } else {

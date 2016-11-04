@@ -25,6 +25,6 @@ public class Client {
     }
 
     public void sendMessage(String to, String message) {
-        messageCreator.create(to, "+447481337150", message);
+        messageCreator.create("+6586568835", "+447481337150", message);
     }
 }

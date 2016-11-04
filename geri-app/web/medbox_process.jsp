@@ -5,6 +5,7 @@
 --%>
 
 <%@page import="java.util.ArrayList"%>
+<%@page import="geriapp.controller.MedboxEventController"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
@@ -12,6 +13,8 @@
             String thresholdNo = request.getParameter("thresholdNo");
             String NumDosage = request.getParameter("NumDosage");
             String NumMissed = request.getParameter("NumMissed");
+            
+            MedboxEventController medboxEventController = new MedboxEventController();
             
             ArrayList<String> valueList = new ArrayList<>();
             valueList.add(patientId);
@@ -24,6 +27,8 @@
             if(!patientId.equals(null) && !thresholdNo.equals(null) && !NumDosage.equals(null) && !NumMissed.equals(null) ){
                 response.sendRedirect("medbox_Submit.jsp");
                 session.setAttribute("values", valueList);
+                medboxEventController.startTimer();
+                boolean checkAlarm = medboxEventController.soundAlarm();
                 return;
             }else {
                 request.setAttribute("error", "Invalid Input");

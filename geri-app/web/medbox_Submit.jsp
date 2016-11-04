@@ -7,6 +7,7 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Timer"%>
 <%@page import="java.util.TimerTask"%>
+<%@page import="geriapp.controller.MedboxEventController"%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
