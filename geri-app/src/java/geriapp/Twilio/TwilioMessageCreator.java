@@ -6,12 +6,9 @@ import java.util.Map;
 
 import com.twilio.sdk.TwilioRestClient;
 import com.twilio.sdk.TwilioRestException;
-import com.twilio.sdk.resource.factory.CallFactory;
+
 import com.twilio.sdk.resource.factory.SmsFactory;
 import com.twilio.sdk.resource.instance.Account;
-import com.twilio.sdk.verbs.Say;
-import com.twilio.sdk.verbs.TwiMLException;
-import com.twilio.sdk.verbs.TwiMLResponse;
 
 public class TwilioMessageCreator {
 

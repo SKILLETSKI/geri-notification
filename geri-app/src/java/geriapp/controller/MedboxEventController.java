@@ -10,9 +10,7 @@ import geriapp.dao.ReadingDAO;
 import geriapp.entity.reading.Reading;
 import geriapp.entity.event.MedboxEvent;
 import geriapp.thread.MedboxReadThread;
-import geriapp.Twilio.TwilioMessageCreator;
 
-import com.twilio.sdk.TwilioRestException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
@@ -29,9 +27,9 @@ public class MedboxEventController {
     private MedboxReadThread mbReadThread = new MedboxReadThread();
     private ArrayList<Reading> latestMedboxReadings = new ArrayList<Reading>();
     
-    
+    /*
     public TwilioMessageCreator messageCreator = new TwilioMessageCreator();
-     
+    */ 
     
     
     
@@ -63,20 +61,22 @@ public class MedboxEventController {
             int numMissed = numExpected - numOpened;
             
             if (numMissed > numCanMiss) {
-                
+                /*
                 try{
                     messageCreator.message("Patient has not been taking medicine regularly");
                 }catch(TwilioRestException twilioRestException){
                     twilioRestException.printStackTrace();
-                }    
+                } 
+                */
                 return true;
             } else {
-                
+                /*
                 try{
                     messageCreator.message("Patient is taking medicine as per normal");
                 }catch(TwilioRestException twilioRestException){
                     twilioRestException.printStackTrace();
-                }    
+                } 
+                */
                 return false;
             }
         } else {

@@ -15,6 +15,10 @@
         <servlet-name>MedboxServlet</servlet-name>
         <servlet-class>geriapp.servlets.MedboxServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DemoServlet</servlet-name>
+        <servlet-class>geriapp.servlets.DemoServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>BootstrapServlet</servlet-name>
         <url-pattern>/Bootstrap</url-pattern>
@@ -22,6 +26,10 @@
     <servlet-mapping>
         <servlet-name>MedboxServlet</servlet-name>
         <url-pattern>/MedboxIn</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DemoServlet</servlet-name>
+        <url-pattern>/DemoServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
