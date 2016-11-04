@@ -11,10 +11,8 @@ import geriapp.entity.reading.Reading;
 import geriapp.entity.event.MedboxEvent;
 import geriapp.thread.MedboxReadThread;
 import geriapp.Twilio.TwilioMessageCreator;
-import geriapp.Twilio.Credential;
-import geriapp.Twilio.Client;
 
-import com.twilio.http.TwilioRestClient;
+import com.twilio.sdk.TwilioRestException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
@@ -31,10 +29,10 @@ public class MedboxEventController {
     private MedboxReadThread mbReadThread = new MedboxReadThread();
     private ArrayList<Reading> latestMedboxReadings = new ArrayList<Reading>();
     
-    public Credential twilioCredentials = new Credential();
-    public TwilioMessageCreator messageCreator = new TwilioMessageCreator(new TwilioRestClient.Builder("ekthiara.2013@sis.smu.edu.sg", "S9009336c").build());
+    
+    public TwilioMessageCreator messageCreator = new TwilioMessageCreator();
      
-    private Client twilioClientCreator = null;
+    
     
     
     //consider adding a Medbox class for different medboxes
@@ -66,16 +64,19 @@ public class MedboxEventController {
             
             if (numMissed > numCanMiss) {
                 
-                
-                twilioClientCreator = new Client(messageCreator, twilioCredentials);
-                twilioClientCreator.sendMessage("+6586568835", "Patient not taking medicine");
-                
+                try{
+                    messageCreator.message("Patient has not been taking medicine regularly");
+                }catch(TwilioRestException twilioRestException){
+                    twilioRestException.printStackTrace();
+                }    
                 return true;
             } else {
                 
-                twilioClientCreator = new Client(messageCreator, twilioCredentials);
-                twilioClientCreator.sendMessage("+6586568835", "Patient taking medicine as per normal");
-                
+                try{
+                    messageCreator.message("Patient is taking medicine as per normal");
+                }catch(TwilioRestException twilioRestException){
+                    twilioRestException.printStackTrace();
+                }    
                 return false;
             }
         } else {
