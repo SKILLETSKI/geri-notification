@@ -50,22 +50,15 @@
                 response.sendRedirect("medbox_Submit.jsp");
                 session.setAttribute("values", valueList);
                 medboxEventController.startTimer();
-                boolean checkAlarm = medboxEventController.soundAlarm();
-                if(checkAlarm == true){
-                    SmsFactory smsFactory = userAccount.getSmsFactory();
-                    Map<String, String> smsParams = new HashMap<String, String>();
-                    smsParams.put("To", toPhone);
-                    smsParams.put("From", TWILIO_NUMBER);
-                    smsParams.put("Body", "Patient has not taken medication!");
-                    smsFactory.create(smsParams);
-                }else{
-                    SmsFactory smsFactory = userAccount.getSmsFactory();
-                    Map<String, String> smsParams = new HashMap<String, String>();
-                    smsParams.put("To", toPhone);
-                    smsParams.put("From", TWILIO_NUMBER);
-                    smsParams.put("Body", "Patient is taking medication as per normal!");
-                    smsFactory.create(smsParams);
-                }
+                String checkAlarm = medboxEventController.soundAlarm();
+                
+                SmsFactory smsFactory = userAccount.getSmsFactory();
+                Map<String, String> smsParams = new HashMap<String, String>();
+                smsParams.put("To", toPhone);
+                smsParams.put("From", TWILIO_NUMBER);
+                smsParams.put("Body", checkAlarm);
+                smsFactory.create(smsParams);
+                
                 return;
             }else {
                 request.setAttribute("error", "Invalid Input");

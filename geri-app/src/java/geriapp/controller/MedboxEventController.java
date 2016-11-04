@@ -27,12 +27,6 @@ public class MedboxEventController {
     private MedboxReadThread mbReadThread = new MedboxReadThread();
     private ArrayList<Reading> latestMedboxReadings = new ArrayList<Reading>();
     
-    /*
-    public TwilioMessageCreator messageCreator = new TwilioMessageCreator();
-    */ 
-    
-    
-    
     //consider adding a Medbox class for different medboxes
 
     public int startTimer() {
@@ -53,7 +47,7 @@ public class MedboxEventController {
         return latestMedboxReadings.size();
     }
 
-    public boolean soundAlarm() {
+    public String soundAlarm() {
         if (latestMedboxReadings != null && !latestMedboxReadings.isEmpty()) {
             int numOpened = latestMedboxReadings.size();
             int numExpected = medboxEvent.getNumSupposedToTake();
@@ -61,26 +55,14 @@ public class MedboxEventController {
             int numMissed = numExpected - numOpened;
             
             if (numMissed > numCanMiss) {
-                /*
-                try{
-                    messageCreator.message("Patient has not been taking medicine regularly");
-                }catch(TwilioRestException twilioRestException){
-                    twilioRestException.printStackTrace();
-                } 
-                */
-                return true;
+                
+                return "Patient has not been taking medication!";
             } else {
-                /*
-                try{
-                    messageCreator.message("Patient is taking medicine as per normal");
-                }catch(TwilioRestException twilioRestException){
-                    twilioRestException.printStackTrace();
-                } 
-                */
-                return false;
+                
+                return "Patient has been taking medication as per normal!";
             }
         } else {
-            return false;
+            return "No reading can be found!";
         }
     }
 
