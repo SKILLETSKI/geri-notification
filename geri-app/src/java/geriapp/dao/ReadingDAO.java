@@ -28,9 +28,9 @@ public class ReadingDAO {
         if (reading instanceof MedboxReading) {
             newColl = db.getCollection("Medbox");
             Document medboxReading = new Document("gw_id", ((MedboxReading) reading).getGw_id());
-            medboxReading.append("server_timestamp",((MedboxReading) reading).getServer_timestamp().toString());
+            medboxReading.append("server_timestamp",((MedboxReading) reading).getServer_timestamp());
             medboxReading.append("sequence",((MedboxReading) reading).getSequence());
-            medboxReading.append("gw_timestamp",((MedboxReading) reading).getGw_timestamp().toString());
+            medboxReading.append("gw_timestamp",((MedboxReading) reading).getGw_timestamp());
             medboxReading.append("sensor_id",((MedboxReading) reading).getSensor_id());
             medboxReading.append("reed_val",((MedboxReading) reading).getReed_val());
             newColl.insertOne(medboxReading);

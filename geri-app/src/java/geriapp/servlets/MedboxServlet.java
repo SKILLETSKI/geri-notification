@@ -6,6 +6,7 @@
 package geriapp.servlets;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import geriapp.dao.ReadingDAO;
 import geriapp.entity.reading.MedboxReading;
@@ -86,7 +87,9 @@ public class MedboxServlet extends HttpServlet {
         } catch (Exception e) {
         }
         
+        //Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
         Gson gson = new Gson();
+
         MedboxReading reading = gson.fromJson(sb.toString(), MedboxReading.class);
         ReadingDAO.storeReading(reading);
     }

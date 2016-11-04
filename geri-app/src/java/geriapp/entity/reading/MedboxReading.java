@@ -13,9 +13,9 @@ import java.sql.Timestamp;
  */
 public class MedboxReading extends Reading {
     private int gw_id;
-    private Timestamp server_timestamp;
+    private String server_timestamp;
     private int sequence;
-    private Timestamp gw_timestamp;
+    private String gw_timestamp;
     private int sensor_id;
     private int reed_val;
 
@@ -27,11 +27,11 @@ public class MedboxReading extends Reading {
         this.gw_id = gw_id;
     }
 
-    public Timestamp getServer_timestamp() {
+    public String getServer_timestamp() {
         return server_timestamp;
     }
 
-    public void setServer_timestamp(Timestamp server_timestamp) {
+    public void setServer_timestamp(String server_timestamp) {
         this.server_timestamp = server_timestamp;
     }
 
@@ -43,11 +43,11 @@ public class MedboxReading extends Reading {
         this.sequence = sequence;
     }
 
-    public Timestamp getGw_timestamp() {
+    public String getGw_timestamp() {
         return gw_timestamp;
     }
 
-    public void setGw_timestamp(Timestamp gw_timestamp) {
+    public void setGw_timestamp(String gw_timestamp) {
         this.gw_timestamp = gw_timestamp;
     }
 
