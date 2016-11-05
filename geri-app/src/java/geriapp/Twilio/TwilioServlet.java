@@ -73,6 +73,7 @@ public class TwilioServlet extends HttpServlet {
     }
 
     private String processMessage(String message) throws TwilioRestException{
+        /*
         String output = "Caregiver: Jessica Bong, The command that you input is incorrect. Please input if you are\n1. Available 2. Unavailable";
 
         if (message == "1") {
@@ -95,6 +96,8 @@ public class TwilioServlet extends HttpServlet {
             smsFactory.create(smsParams);
 
         }
+        */
+        String output = message;
         return output;
     }
 
