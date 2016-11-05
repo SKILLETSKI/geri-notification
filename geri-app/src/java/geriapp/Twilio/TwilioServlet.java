@@ -72,33 +72,39 @@ public class TwilioServlet extends HttpServlet {
         }
     }
 
-    private String processMessage(String message) throws TwilioRestException{
-        /*
+    private String processMessage(String message){
+        
         String output = "Caregiver: Jessica Bong, The command that you input is incorrect. Please input if you are\n1. Available 2. Unavailable";
 
-        if (message == "1") {
-            output = "Caregiver: Jessica Bong, you have confirmed that you will address\nissue 121: Patient [S123 - Tommy Tan] has not taken medication from 1000 - 1400 hrs";
-        }else if(message == "2"){
-            output = "Caregiver: Jessica Bong, you have confirmed that you will NOT be able to address\nissue121: Patient [S123 - Tommy Tan] has not taken medication from 1000 - 1400 hrs. \nIssue Escalated";
+        if (message.equals("1")) {
+            return "Caregiver: Jessica Bong, you have confirmed that you will address\nissue 121: Patient [S123 - Tommy Tan] has not taken medication from 1000 - 1400 hrs";
+        }else if(message.equals("2")){
             
-            String toPhone = "+6586068378";
-            String TWILIO_ACCOUNT_SID = "ACec01a875b5cc448f2b2e903087059d29";
-            String TWILIO_AUTH_TOKEN = "16f2063d70f35433fb14a141c308becf";
-            String TWILIO_NUMBER = "+447481337150";
-            TwilioRestClient twilioClient = new TwilioRestClient(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN);
-            Account userAccount = twilioClient.getAccount();
+            try{
+                String toPhone = "+6586068378";
+                String TWILIO_ACCOUNT_SID = "ACec01a875b5cc448f2b2e903087059d29";
+                String TWILIO_AUTH_TOKEN = "16f2063d70f35433fb14a141c308becf";
+                String TWILIO_NUMBER = "+447481337150";
+                TwilioRestClient twilioClient = new TwilioRestClient(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN);
+                Account userAccount = twilioClient.getAccount();
 
-            SmsFactory smsFactory = userAccount.getSmsFactory();
-            Map<String, String> smsParams = new HashMap<String, String>();
-            smsParams.put("To", toPhone);
-            smsParams.put("From", TWILIO_NUMBER);
-            smsParams.put("Body", "Caregiver: Jessica Bong is unable to attend to\nissue121: Patient [S123 - Tommy Tan] has not taken medication from 1000 - 1400 hrs.\nCaregiver: Elizabeth Ong, Will you be able to attend in their place?");
-            smsFactory.create(smsParams);
-
+                SmsFactory smsFactory = userAccount.getSmsFactory();
+                Map<String, String> smsParams = new HashMap<String, String>();
+                smsParams.put("To", toPhone);
+                smsParams.put("From", TWILIO_NUMBER);
+                smsParams.put("Body", "Caregiver: Jessica Bong is unable to attend to\nissue121: Patient [S123 - Tommy Tan] has not taken medication from 1000 - 1400 hrs.\nCaregiver: Elizabeth Ong, Will you be able to attend in their place?");
+                smsFactory.create(smsParams);
+                return "Caregiver: Jessica Bong, you have confirmed that you will NOT be able to address\nissue121: Patient [S123 - Tommy Tan] has not taken medication from 1000 - 1400 hrs. \nIssue Escalated";
+            }catch(TwilioRestException e){
+                return "Twilio Rest Exception";
+            }
+            
+            
+        }else{
+            return output;
         }
-        */
-        String output = message;
-        return output;
+        
+        
     }
 
 }
