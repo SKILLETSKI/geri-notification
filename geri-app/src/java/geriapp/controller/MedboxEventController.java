@@ -65,7 +65,7 @@ public class MedboxEventController {
             
             if (numMissed > numCanMiss) {
                 
-                return "Patient [S123 - Tommy Tan] has NOT taken medication from 1000 - 1400 hrs. Please input if you are\n1. Available 2. Unavailable";
+                return "Patient [S123 - Tommy Tan] has NOT taken medication from 1000 - 1400 hrs. Please input if you are\n1. Available\n2. Unavailable";
             } else {
                 
                 return "Patient [S123 - Tommy Tan] taking medication from 1000 - 1400 hrs as per normal";

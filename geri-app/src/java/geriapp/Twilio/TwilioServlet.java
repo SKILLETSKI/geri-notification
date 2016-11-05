@@ -74,7 +74,7 @@ public class TwilioServlet extends HttpServlet {
 
     private String processMessage(String message){
         
-        String output = "Caregiver: Jessica Bong, The command that you input is incorrect. Please input if you are\n1. Available 2. Unavailable";
+        String output = "Caregiver: Jessica Bong, The command that you input is incorrect. Please input if you are\n1. Available\n2. Unavailable";
 
         if (message.equals("1")) {
             return "Caregiver: Jessica Bong, you have confirmed that you will address\nissue 121: Patient [S123 - Tommy Tan] has not taken medication from 1000 - 1400 hrs";
