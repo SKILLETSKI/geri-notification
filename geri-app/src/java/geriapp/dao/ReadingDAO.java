@@ -11,6 +11,11 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import geriapp.entity.reading.MedboxReading;
 import geriapp.entity.reading.Reading;
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import org.bson.Document;
 
 /**
@@ -53,6 +58,36 @@ public class ReadingDAO {
             String json = latestEntry.toJson();
             Reading reading = gson.fromJson(json, MedboxReading.class);
             return reading;
+        }
+        return null; //throw Exception??
+    }
+    
+    public static Reading getReadingsBetween(String type,Timestamp startTime,Timestamp endTime) {
+        MongoClient mongo = new MongoClient("54.254.204.169", 27017);
+        
+        MongoDatabase db = mongo.getDatabase("GERI");
+        
+        MongoCollection<Document> newColl;
+        
+        Gson gson = new Gson();
+        
+        if (type.equals("medbox")) {
+            newColl = db.getCollection("Medbox");
+            Document latestEntry = newColl.find().iterator().next();
+            String json = latestEntry.toJson();
+            MedboxReading reading = gson.fromJson(json, MedboxReading.class);
+            String thisTimestamp = reading.getGw_timestamp();
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date parsedTimestamp = null;
+            try {
+                parsedTimestamp = df.parse(thisTimestamp);
+            } catch (ParseException e) {
+                return null;
+            }
+            Timestamp gwTimestamp = new Timestamp(parsedTimestamp.getTime());
+            if (gwTimestamp.after(startTime) && gwTimestamp.before(endTime)) {
+                return reading;
+            }
         }
         return null; //throw Exception??
     }

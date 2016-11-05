@@ -13,6 +13,7 @@ import geriapp.thread.MedboxReadThread;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -24,23 +25,31 @@ public class MedboxEventController {
 
     private MedboxEvent medboxEvent = new MedboxEvent();
     private ReadingDAO readingDAO = new ReadingDAO();
-    private MedboxReadThread mbReadThread = new MedboxReadThread();
+    private MedboxReadThread mbReadThread;
     private ArrayList<Reading> latestMedboxReadings = new ArrayList<Reading>();
     
     //consider adding a Medbox class for different medboxes
 
     public int startTimer() {
-        long startTime = System.currentTimeMillis();
-        long elapsedTime = 0;
+        long startTimer = System.currentTimeMillis();
+        long elapsedTimer = 0;
+        
+        Timestamp startTimestamp = new Timestamp(startTimer);
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(startTimestamp.getTime());
+        cal.add(Calendar.MILLISECOND,medboxEvent.getThreshold());
+        Timestamp endTimestamp = new Timestamp(cal.getTime().getTime());
+        
+        mbReadThread = new MedboxReadThread(startTimestamp,endTimestamp);
         Thread medboxTimerThread = new Thread(mbReadThread);
         medboxTimerThread.start();
 
-        while (elapsedTime < medboxEvent.getThreshold()) {
+        while (elapsedTimer < medboxEvent.getThreshold()) {
             Reading reading = mbReadThread.getMbReading();
             if (!latestMedboxReadings.contains(reading) && reading != null) {
                 latestMedboxReadings.add(reading);
             }
-            elapsedTime = (new Date()).getTime() - startTime;
+            elapsedTimer = (new Date()).getTime() - startTimer;
         } //TODO: identify unique readings and place into ArrayList
         
         mbReadThread.setRun(false);
