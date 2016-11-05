@@ -28,6 +28,10 @@
         <url-pattern>/MedboxIn</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>TwilioResponseServlet</servlet-name>
+        <url-pattern>/incomingsms</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>DemoServlet</servlet-name>
         <url-pattern>/DemoServlet</url-pattern>
     </servlet-mapping>
