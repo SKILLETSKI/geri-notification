@@ -19,6 +19,7 @@ import com.twilio.sdk.TwilioRestClient;
 import com.twilio.sdk.TwilioRestException;
 import com.twilio.sdk.resource.instance.Account;
 import com.twilio.sdk.resource.factory.SmsFactory;
+
 import org.apache.http.NameValuePair;
 import org.apache.http.client.methods.HttpUriRequest;
 import org.apache.commons.logging.LogFactory;
@@ -27,6 +28,7 @@ import org.apache.commons.codec.binary.Base64;
 import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import com.google.common.collect.Lists;
+
 
 import com.twilio.twiml.Body;
 import com.twilio.twiml.Message;
@@ -92,12 +94,12 @@ public class TwilioServlet extends HttpServlet {
                 Map<String, String> smsParams = new HashMap<String, String>();
                 smsParams.put("To", toPhone);
                 smsParams.put("From", TWILIO_NUMBER);
-                smsParams.put("Body", "Caregiver: Jessica Bong is unable to attend to\nissue121: Patient [S123 - Tommy Tan] has not taken medication from 1000 - 1400 hrs.\nCaregiver: Elizabeth Ong, Will you be able to attend in their place?");
+                smsParams.put("Body", "Jessica Bong UNABLE to attend\nissue121: Patient [S123-Tommy Tan] not taken medication from 1000-1400 hrs.\nCaregiver: Elizabeth Ong, Attend? 1.Yes\n2.No");
                 smsFactory.create(smsParams);
-                return "Caregiver: Jessica Bong, you have confirmed that you will NOT be able to address\nissue121: Patient [S123 - Tommy Tan] has not taken medication from 1000 - 1400 hrs. \nIssue Escalated";
+                return "Caregiver: Jessica Bong, confirmed UNABLE to address\nissue121: Patient [S123-Tommy Tan] has not taken medication from 1000 - 1400 hrs. \nIssue Escalated";
             }catch(TwilioRestException e){
-                e.printStackTrace();
-                return "Twilio Rest Exception";
+                
+                return e.toString();
             }
             
             
