@@ -96,6 +96,7 @@ public class TwilioServlet extends HttpServlet {
                 smsFactory.create(smsParams);
                 return "Caregiver: Jessica Bong, you have confirmed that you will NOT be able to address\nissue121: Patient [S123 - Tommy Tan] has not taken medication from 1000 - 1400 hrs. \nIssue Escalated";
             }catch(TwilioRestException e){
+                e.printStackTrace();
                 return "Twilio Rest Exception";
             }
             
