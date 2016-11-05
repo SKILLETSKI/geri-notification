@@ -81,6 +81,6 @@ public class MedboxEventController {
         medboxEvent.setNumSupposedToTake(numOfTakes);
         medboxEvent.setNumCanMiss(numOfMissed);
         //comment this out if you are not using database
-        MedboxEventDAO.createNewMedboxEvent(patientId, threshold, numOfTakes, numOfMissed);
+        //MedboxEventDAO.createNewMedboxEvent(patientId, threshold, numOfTakes, numOfMissed);
     }
 }
