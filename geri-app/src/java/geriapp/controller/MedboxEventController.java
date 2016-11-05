@@ -65,13 +65,13 @@ public class MedboxEventController {
             
             if (numMissed > numCanMiss) {
                 
-                return "Patient has not been taking medication!";
+                return "Patient [S123 - Tommy Tan] has NOT taken medication from 1000 - 1400 hrs";
             } else {
                 
-                return "Patient has been taking medication as per normal!";
+                return "Patient [S123 - Tommy Tan] taking medication from 1000 - 1400 hrs as per normal";
             }
         } else {
-            return "No reading can be found!";
+            return "Error: No reading can be found!";
         }
     }
 

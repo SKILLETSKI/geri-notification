@@ -185,7 +185,7 @@
                                     <tr>
                                         <td>1</td>
                                         <td><a href="medbox.jsp">Tommy Tan</a></td>
-                                        <td>77</td>
+                                        <td>85</td>
                                         <td><span class="label label-sm label-success">Very Healthy</span></td>
                                     </tr>
                                     <tr>
