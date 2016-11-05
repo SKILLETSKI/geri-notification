@@ -41,6 +41,7 @@ public class ReadingDAO {
             newColl.insertOne(medboxReading);
 //TODO: append reading attributes
         }
+        mongo.close();
     }
     
     public static Reading getLatestReading(String type) {
@@ -57,6 +58,7 @@ public class ReadingDAO {
             Document latestEntry = newColl.find().iterator().next();
             String json = latestEntry.toJson();
             Reading reading = gson.fromJson(json, MedboxReading.class);
+            mongo.close();
             return reading;
         }
         return null; //throw Exception??
@@ -85,6 +87,7 @@ public class ReadingDAO {
                 return null;
             }
             Timestamp gwTimestamp = new Timestamp(parsedTimestamp.getTime());
+            mongo.close();
             if (gwTimestamp.after(startTime) && gwTimestamp.before(endTime)) {
                 return reading;
             }
