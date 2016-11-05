@@ -8,8 +8,8 @@
         <servlet-class>geriapp.servlets.BootstrapServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>TwilioResponseServlet</servlet-name>
-        <servlet-class>geriapp.Twilio.TwilioResponseServlet</servlet-class>
+        <servlet-name>TwilioServlet</servlet-name>
+        <servlet-class>geriapp.Twilio.TwilioServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>MedboxServlet</servlet-name>
@@ -28,7 +28,7 @@
         <url-pattern>/MedboxIn</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>TwilioResponseServlet</servlet-name>
+        <servlet-name>TwilioServlet</servlet-name>
         <url-pattern>/incomingsms</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
