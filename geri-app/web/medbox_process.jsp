@@ -29,12 +29,12 @@
             String numDosage = request.getParameter("NumDosage");
             String numMissed = request.getParameter("NumMissed");
             
-            String toPhone = "+6586568835";
-            String TWILIO_ACCOUNT_SID = "ACec01a875b5cc448f2b2e903087059d29";
-            String TWILIO_AUTH_TOKEN = "16f2063d70f35433fb14a141c308becf";
-            String TWILIO_NUMBER = "+447481337150";
-            TwilioRestClient twilioClient = new TwilioRestClient(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN);
-            Account userAccount = twilioClient.getAccount();
+//            String toPhone = "+6586568835";
+//            String TWILIO_ACCOUNT_SID = "ACec01a875b5cc448f2b2e903087059d29";
+//            String TWILIO_AUTH_TOKEN = "16f2063d70f35433fb14a141c308becf";
+//            String TWILIO_NUMBER = "+447481337150";
+//            TwilioRestClient twilioClient = new TwilioRestClient(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN);
+//            Account userAccount = twilioClient.getAccount();
 
             MedboxEventController medboxEventController = new MedboxEventController();
             //set medbox rule first
@@ -54,15 +54,16 @@
             if(!patientId.equals(null) && !thresholdNo.equals(null) && !numDosage.equals(null) && !numMissed.equals(null) ){
                 
                 session.setAttribute("values", valueList);
-                medboxEventController.startTimer();
-                String checkAlarm = medboxEventController.soundAlarm();
-                
-                SmsFactory smsFactory = userAccount.getSmsFactory();
-                Map<String, String> smsParams = new HashMap<String, String>();
-                smsParams.put("To", toPhone);
-                smsParams.put("From", TWILIO_NUMBER);
-                smsParams.put("Body", checkAlarm);
-                smsFactory.create(smsParams);
+                session.setAttribute("medboxEventController",medboxEventController);
+//                medboxEventController.startTimer();
+//                String checkAlarm = medboxEventController.soundAlarm();
+//                
+//                SmsFactory smsFactory = userAccount.getSmsFactory();
+//                Map<String, String> smsParams = new HashMap<String, String>();
+//                smsParams.put("To", toPhone);
+//                smsParams.put("From", TWILIO_NUMBER);
+//                smsParams.put("Body", checkAlarm);
+//                smsFactory.create(smsParams);
                 
                 //shifted this down
                 response.sendRedirect("medbox_Submit.jsp");

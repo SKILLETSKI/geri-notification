@@ -4,6 +4,11 @@
     Author     : ASUS
 --%>
 
+<%@page import="com.twilio.sdk.resource.instance.Account"%>
+<%@page import="com.twilio.sdk.TwilioRestClient"%>
+<%@page import="java.util.Map"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="com.twilio.sdk.resource.factory.SmsFactory"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.Timer"%>
 <%@page import="java.util.TimerTask"%>
@@ -11,6 +16,22 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%
+    MedboxEventController medboxEventController = (MedboxEventController) session.getAttribute("medboxEventController");
+    ArrayList<String> valuesList = (ArrayList<String>) session.getAttribute("values");
+    String patientId = valuesList.get(0);
+    String thresholdNo = valuesList.get(1);
+    String NumDosage = valuesList.get(2);
+    String NumMissed = valuesList.get(3);
+
+    String toPhone = "+6586568835";
+    String TWILIO_ACCOUNT_SID = "ACec01a875b5cc448f2b2e903087059d29";
+    String TWILIO_AUTH_TOKEN = "16f2063d70f35433fb14a141c308becf";
+    String TWILIO_NUMBER = "+447481337150";
+    TwilioRestClient twilioClient = new TwilioRestClient(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN);
+    Account userAccount = twilioClient.getAccount();
+
+%>
 <html lang="en">
     <head>
         <title>Gerification | Medbox</title>
@@ -36,15 +57,28 @@
         <link type="text/css" rel="stylesheet" href="styles/jquery.news-ticker.css">
     </head>
     <script type="text/javascript">
-    // set minutes
+        // set minutes
         var mins = 1;
 
-    // calculate the seconds (don't change this! unless time progresses at a different speed for you...)
+        // calculate the seconds (don't change this! unless time progresses at a different speed for you...)
         var secs = mins * 60;
         function countdown() {
             setTimeout('Decrement()', 1000);
 
         }
+
+        <%            medboxEventController.startTimer();
+            String checkAlarm = medboxEventController.soundAlarm();
+
+            SmsFactory smsFactory = userAccount.getSmsFactory();
+            Map<String, String> smsParams = new HashMap<String, String>();
+            smsParams.put("To", toPhone);
+            smsParams.put("From", TWILIO_NUMBER);
+            smsParams.put("Body", checkAlarm);
+            smsFactory.create(smsParams);
+
+        %>
+
         function Decrement() {
             if (document.getElementById) {
                 //minutes = document.getElementById("minutes");
@@ -81,12 +115,6 @@
             countdown();
         </script>
         <%
-            ArrayList<String> valuesList = (ArrayList<String>) session.getAttribute("values");
-            String patientId = valuesList.get(0);
-            String thresholdNo = valuesList.get(1);
-            String NumDosage = valuesList.get(2);
-            String NumMissed = valuesList.get(3);
-
         %>
         <div>
             <!--BEGIN THEME SETTING-->
@@ -349,18 +377,18 @@
         <!--CORE JAVASCRIPT-->
         <script src="script/main.js"></script>
         <script>        (function (i, s, o, g, r, a, m) {
-            i['GoogleAnalyticsObject'] = r;
-            i[r] = i[r] || function () {
-                (i[r].q = i[r].q || []).push(arguments)
-            }, i[r].l = 1 * new Date();
-            a = s.createElement(o),
-                    m = s.getElementsByTagName(o)[0];
-            a.async = 1;
-            a.src = g;
-            m.parentNode.insertBefore(a, m)
-        })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-        ga('create', 'UA-145464-12', 'auto');
-        ga('send', 'pageview');
+                i['GoogleAnalyticsObject'] = r;
+                i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+                a = s.createElement(o),
+                        m = s.getElementsByTagName(o)[0];
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+            ga('create', 'UA-145464-12', 'auto');
+            ga('send', 'pageview');
 
 
         </script>
