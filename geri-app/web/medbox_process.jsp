@@ -5,10 +5,22 @@
 --%>
 
 <%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="geriapp.controller.MedboxEventController"%>
 <%@page import="com.twilio.*"%>
+<%@page import="org.apache.http.impl.client.CloseableHttpClient"%>
+<%@page import="org.apache.http.impl.client.HttpClientBuilder"%>
+<%@page import="java.io.IOException"%>
+<%@page import="org.apache.http.client.HttpClient"%>
+<%@page import="org.apache.http.message.BasicNameValuePair"%>
+<%@page import="org.apache.http.client.entity.UrlEncodedFormEntity"%>
+<%@page import="org.apache.http.client.methods.HttpPost"%>
+<%@page import="org.apache.http.impl.client.HttpClients"%>
+<%@page import="org.apache.http.HttpResponse"%>
+<%@page import="org.apache.http.client.methods.HttpGet"%>
+<%@page import="org.apache.http.client.ClientProtocolException"%>"
 <%@page import="com.twilio.sdk.*"%>
 <%@page import="com.twilio.sdk.TwilioRestClient"%>
 <%@page import="com.twilio.sdk.TwilioRestException"%>
@@ -42,7 +54,31 @@
 //            int numOfTakes = Integer.parseInt(numDosage);
 //            int numOfMissed = Integer.parseInt(numMissed);
 //            medboxEventController.setMedboxEvent(patientId, threshold, numOfTakes, numOfMissed);
+            int threshold = Integer.parseInt(thresholdNo)*1000;
+            int numOfTakes = Integer.parseInt(numDosage);
+            int numOfMissed = Integer.parseInt(numMissed);
             
+            HttpClient httpclient = HttpClients.createDefault();
+            HttpPost httppost = new HttpPost("http://default-environment.bxypxxac43.ap-southeast-1.elasticbeanstalk.com/MedboxTimer");
+
+            // Request parameters and other properties.
+            List<NameValuePair> params = new ArrayList<NameValuePair>(2);
+            params.add(new BasicNameValuePair("threshold", ""+threshold));
+            params.add(new BasicNameValuePair("numOfTakes", ""+numOfTakes));
+            params.add(new BasicNameValuePair("numOfMissed", ""+numOfMissed));
+            httppost.setEntity(new UrlEncodedFormEntity(params));
+
+            //Execute and get the response.
+            httpclient.execute(httppost);
+            /*
+            CloseableHttpClient client = HttpClientBuilder.create().build();
+            HttpGet newRequest = new HttpGet("http://default-environment.bxypxxac43.ap-southeast-1.elasticbeanstalk.com/MedboxTimer?threshold="+threshold+"&numOfTakes="+numOfTakes+"&numOfMissed="+numOfMissed);
+            try{
+                HttpResponse thisResponse = client.execute(newRequest);
+            }catch(ClientProtocolException e){
+                e.printStackTrace();
+            }
+            */
             ArrayList<String> valueList = new ArrayList<>();
             valueList.add(patientId);
             valueList.add(thresholdNo);

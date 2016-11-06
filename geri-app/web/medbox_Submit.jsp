@@ -120,11 +120,12 @@
         <script>
             countdown();
         </script>
-        <%
+        <%  
+            
             int threshold = Integer.parseInt(thresholdNo)*1000;
             int numOfTakes = Integer.parseInt(numDosage);
             int numOfMissed = Integer.parseInt(numMissed);
-            
+            /*
             CloseableHttpClient client = HttpClientBuilder.create().build();
             HttpGet newRequest = new HttpGet("http://default-environment.bxypxxac43.ap-southeast-1.elasticbeanstalk.com/MedboxTimer?threshold="+threshold+"&numOfTakes="+numOfTakes+"&numOfMissed="+numOfMissed);
             try{
@@ -132,6 +133,7 @@
             }catch(ClientProtocolException e){
                 e.printStackTrace();
             }
+            */
         %>
         <div>
             <!--BEGIN THEME SETTING-->

@@ -113,41 +113,43 @@ public class ReadingDAO {
             Document latestEntry = null;
             boolean run = true;
             ArrayList<MedboxReading> results = new ArrayList<MedboxReading>();
-//            while (run) {
-//                latestEntry = iterator.next();
-//                if (latestEntry==null) {
-//                    run = false;
-//                    size = 121;
-//                    break;
-//                }
-//                String json = latestEntry.toJson();
-//                MedboxReading reading = gson.fromJson(json, MedboxReading.class);
-//                String thisTimestamp = reading.getGw_timestamp();
-//                DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//                Date parsedTimestamp = null;
-//                try {
-//                    parsedTimestamp = df.parse(thisTimestamp);
-//                } catch (ParseException e) {
-//                    run = false;
-//                }
-//                Timestamp gwTimestamp = new Timestamp(parsedTimestamp.getTime());
-//                if (gwTimestamp.after(startTime)) {
-//                //if (gwTimestamp.after(startTime) && gwTimestamp.before(endTime)) {
-//                    results.add(reading);
-//                } else {
-//                    run = false;
-//                }
-//            }
+            while (run) {
+                latestEntry = iterator.next();
+                if (latestEntry==null) {
+                    run = false;
+                    size = 121;
+                    break;
+                }
+                String json = latestEntry.toJson();
+                MedboxReading reading = gson.fromJson(json, MedboxReading.class);
+                String thisTimestamp = reading.getGw_timestamp();
+                DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                Date parsedTimestamp = null;
+                try {
+                    parsedTimestamp = df.parse(thisTimestamp);
+                } catch (ParseException e) {
+                    run = false;
+                }
+                Timestamp gwTimestamp = new Timestamp(parsedTimestamp.getTime());
+                if (gwTimestamp.after(startTime)) {
+                //if (gwTimestamp.after(startTime) && gwTimestamp.before(endTime)) {
+                    results.add(reading);
+                } else {
+                    run = false;
+                }
+            }
+            /*
             while (iterator.hasNext()) {
                 latestEntry = iterator.next();
                 String json = latestEntry.toJson();
                 MedboxReading reading = gson.fromJson(json, MedboxReading.class);
                 results.add(reading);
             }
+            */
             mongo.close();
             size = results.size();
             return size;
         }
-        return 0; //throw Exception??
+        return size; //throw Exception??
     }
 }

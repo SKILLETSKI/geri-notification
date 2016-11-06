@@ -66,11 +66,13 @@ public class MedboxEventController {
         
         Calendar startCal = Calendar.getInstance(timeZone);
         long startTimer = startCal.getTimeInMillis();
+        
         Timestamp startTimestamp = new Timestamp(startTimer - 30000);
+        System.out.println(startTimestamp.toString());
         Calendar endCal = Calendar.getInstance(timeZone);
-        endCal.add(Calendar.MILLISECOND,threshold);
-        Timestamp endTimestamp = new Timestamp(endCal.getTimeInMillis());
-
+        
+        Timestamp endTimestamp = new Timestamp(startTimer + threshold);
+        System.out.println(endTimestamp.toString());
         while (elapsedTimer < threshold) {
             elapsedTimer = (new Date()).getTime() - startTimer;
         } //TODO: identify unique readings and place into ArrayList
