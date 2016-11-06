@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 import java.util.HashMap;
 
+
+
 import com.twilio.sdk.TwilioRestClient;
 import com.twilio.sdk.TwilioRestException;
 import com.twilio.sdk.resource.instance.Account;
@@ -49,18 +51,31 @@ public class TwilioServlet extends HttpServlet {
         String phone = request.getParameter("From");
         String body = request.getParameter("Body");
         
+        Map<String, String> recognisedNumbers = new HashMap<String, String>();
+        recognisedNumbers.put("Jessica Bong", "+6586568835");
+        recognisedNumbers.put("Elizabeth Ong", "+6586568835");
         
-
-        String output;
-
-        try{
-                output = processMessage(phone, body);
-            
-        } catch (Exception e) {
-            output = "We were unable to process your request!";
-            e.printStackTrace();
+        boolean isRecognisedPhone = false;
+        String senderName = "Jessica Bong";
+        
+        String output = "We were unable to process your request!";
+        
+        for(Map.Entry<String, String> validateNumber: recognisedNumbers.entrySet()){
+            if(validateNumber.getValue().equals(phone)){
+                isRecognisedPhone = true;
+                senderName = validateNumber.getKey();
+            }
         }
-
+        
+        if(isRecognisedPhone){
+            try{
+                output = processMessage(phone, body, senderName);
+             } catch (Exception e) {
+                output = "We were unable to process your request!";
+                e.printStackTrace();
+             }
+        }
+        
         try {
             MessagingResponse messagingResponse = new MessagingResponse.Builder()
                     .message(new Message.Builder().body(new Body(output)).build())
@@ -74,14 +89,13 @@ public class TwilioServlet extends HttpServlet {
         }
     }
 
-    private String processMessage(String phone, String message){
+    private String processMessage(String phone, String message, String senderName){
         
         String output = "Caregiver: Jessica Bong, The command that you input is incorrect. Please input if you are\n1. Available\n2. Unavailable";
         
         
         if (message.equals("1")) {
-            return phone;
-            //return "Caregiver: Jessica Bong, you have confirmed that you will address\nissue 121: Patient [S123 - Tommy Tan] has not taken medication from 1000 - 1400 hrs";
+            return "Caregiver: " + senderName + ", you have confirmed that you will address\nissue 121: Patient [S123 - Tommy Tan] has not taken medication from 1000 - 1400 hrs";
         }else if(message.equals("2")){
             
             try{
@@ -96,10 +110,10 @@ public class TwilioServlet extends HttpServlet {
                 Map<String, String> smsParams = new HashMap<String, String>();
                 smsParams.put("To", toPhone);
                 smsParams.put("From", TWILIO_NUMBER);
-                //smsParams.put("Body", "Jessica Bong UNABLE to attend\nissue121: Patient [S123-Tommy Tan] not taken medication from 1000-1400 hrs.\nCaregiver: Elizabeth Ong, Attend? 1.Yes\n2.No");
-                smsParams.put("Body", phone); 
+                smsParams.put("Body", senderName + " UNABLE to attend\nissue121: Patient [S123-Tommy Tan] not taken medication from 1000-1400 hrs.\nCaregiver: Elizabeth Ong, Attend? 1.Yes\n2.No");
+                //smsParams.put("Body", phone); 
                 smsFactory.create(smsParams);
-                return "Caregiver: Jessica Bong, confirmed UNABLE to address\nissue121: Patient [S123-Tommy Tan] has not taken medication from 1000 - 1400 hrs. \nIssue Escalated";
+                return "Caregiver: " + senderName + ", confirmed UNABLE to address\nissue121: Patient [S123-Tommy Tan] has not taken medication from 1000 - 1400 hrs. \nIssue Escalated";
             }catch(TwilioRestException e){
                 
                 return e.toString();
@@ -107,8 +121,8 @@ public class TwilioServlet extends HttpServlet {
             
             
         }else{
-            return phone;
-            //return output;
+            //return phone;
+            return output;
         }
         
         
