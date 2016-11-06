@@ -10,7 +10,7 @@ import geriapp.dao.ReadingDAO;
 import geriapp.entity.reading.Reading;
 import geriapp.entity.event.MedboxEvent;
 import geriapp.thread.MedboxReadThread;
-
+import java.util.TimeZone;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -58,15 +58,18 @@ public class MedboxEventController {
     
     
     public int startTimer(int threshold) {
-        long startTimer = System.currentTimeMillis();
+        
         long elapsedTimer = 0;
         
+        TimeZone timeZone = TimeZone.getTimeZone("GMT+8");
         //Timestamp startTimestamp = new Timestamp(startTimer-30000);
-        Timestamp startTimestamp = new Timestamp(startTimer-300000);
-        Calendar cal = Calendar.getInstance();
-        cal.setTimeInMillis(startTimestamp.getTime());
-        cal.add(Calendar.MILLISECOND,threshold);
-        Timestamp endTimestamp = new Timestamp(cal.getTime().getTime());
+        
+        Calendar startCal = Calendar.getInstance(timeZone);
+        long startTimer = startCal.getTimeInMillis();
+        Timestamp startTimestamp = new Timestamp(startTimer - 30000);
+        Calendar endCal = Calendar.getInstance(timeZone);
+        endCal.add(Calendar.MILLISECOND,threshold);
+        Timestamp endTimestamp = new Timestamp(endCal.getTimeInMillis());
 
         while (elapsedTimer < threshold) {
             elapsedTimer = (new Date()).getTime() - startTimer;
