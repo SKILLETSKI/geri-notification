@@ -118,7 +118,7 @@
             countdown();
         </script>
         <%
-            int threshold = Integer.parseInt(thresholdNo)*60*1000;
+            int threshold = Integer.parseInt(thresholdNo)*1000;
             int numOfTakes = Integer.parseInt(numDosage);
             int numOfMissed = Integer.parseInt(numMissed);
             //change this...
