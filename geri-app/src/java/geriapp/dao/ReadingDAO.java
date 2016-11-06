@@ -104,7 +104,7 @@ public class ReadingDAO {
         MongoDatabase db = mongo.getDatabase("GERI");
         int size = 0;
         MongoCollection<Document> newColl;
-
+        
         Gson gson = new Gson();
 
         if (type.equals("medbox")) {
@@ -123,18 +123,22 @@ public class ReadingDAO {
                 String json = latestEntry.toJson();
                 MedboxReading reading = gson.fromJson(json, MedboxReading.class);
                 String thisTimestamp = reading.getGw_timestamp();
+                
                 DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 Date parsedTimestamp = null;
                 try {
                     parsedTimestamp = df.parse(thisTimestamp);
+                    //System.out.println(""+parsedTimestamp);
                 } catch (ParseException e) {
+                    e.printStackTrace();
                     run = false;
                 }
                 Timestamp gwTimestamp = new Timestamp(parsedTimestamp.getTime());
-                if (gwTimestamp.after(startTime)) {
-                //if (gwTimestamp.after(startTime) && gwTimestamp.before(endTime)) {
+                //if (gwTimestamp.after(startTime)) {
+                if (gwTimestamp.after(startTime) && gwTimestamp.before(endTime)) {
                     results.add(reading);
-                } else {
+                } 
+                if(!iterator.hasNext()){
                     run = false;
                 }
             }
