@@ -39,7 +39,7 @@ import org.codehaus.jackson.map.JsonMappingException;
  *
  * @author muhammadims.2013
  */
-@WebServlet(name = "TimerStartThread", urlPatterns = {"/TimerStartThread"})
+@WebServlet(name = "MedboxTimerServlet", urlPatterns = {"/MedboxTimer"})
 public class MedboxTimerServlet extends HttpServlet {
 
     /**
