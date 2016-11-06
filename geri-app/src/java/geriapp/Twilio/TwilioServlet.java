@@ -53,14 +53,15 @@ public class TwilioServlet extends HttpServlet {
         
         Map<String, String> recognisedNumbers = new HashMap<String, String>();
         recognisedNumbers.put("Jessica Bong", "+6586568835");
-        recognisedNumbers.put("Elizabeth Ong", "+6586568835");
+        recognisedNumbers.put("Elizabeth Ong", "+6586068378");
         
         boolean isRecognisedPhone = false;
         String senderName = "Jessica Bong";
         
-        String output = "We were unable to process your request!";
+        String output = "You are not registered on this service!";
         
         for(Map.Entry<String, String> validateNumber: recognisedNumbers.entrySet()){
+
             if(validateNumber.getValue().equals(phone)){
                 isRecognisedPhone = true;
                 senderName = validateNumber.getKey();
