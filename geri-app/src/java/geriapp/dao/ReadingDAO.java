@@ -130,7 +130,8 @@ public class ReadingDAO {
                     run = false;
                 }
                 Timestamp gwTimestamp = new Timestamp(parsedTimestamp.getTime());
-                if (gwTimestamp.after(startTime) && gwTimestamp.before(endTime)) {
+                if (gwTimestamp.after(startTime)) {
+                //if (gwTimestamp.after(startTime) && gwTimestamp.before(endTime)) {
                     results.add(reading);
                 } else {
                     run = false;

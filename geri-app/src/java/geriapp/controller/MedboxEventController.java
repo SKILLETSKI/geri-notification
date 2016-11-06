@@ -61,7 +61,8 @@ public class MedboxEventController {
         long startTimer = System.currentTimeMillis();
         long elapsedTimer = 0;
         
-        Timestamp startTimestamp = new Timestamp(startTimer-30000);
+        //Timestamp startTimestamp = new Timestamp(startTimer-30000);
+        Timestamp startTimestamp = new Timestamp(startTimer-300000);
         Calendar cal = Calendar.getInstance();
         cal.setTimeInMillis(startTimestamp.getTime());
         cal.add(Calendar.MILLISECOND,threshold);
