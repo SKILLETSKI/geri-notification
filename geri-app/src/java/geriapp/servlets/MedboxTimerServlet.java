@@ -95,9 +95,9 @@ public class MedboxTimerServlet extends HttpServlet {
         MedboxEventController medboxEventController = new MedboxEventController();
         int numOfReadings = medboxEventController.startTimer(threshold);
         
-        String checkAlarm = medboxEventController.soundAlarm();
+        //String checkAlarm = medboxEventController.soundAlarm();
         
-        System.out.println(checkAlarm);
+        //System.out.println(checkAlarm);
         if (numOfReadings < (numOfTakes - numOfMissed)) {
             
             try{
@@ -105,7 +105,7 @@ public class MedboxTimerServlet extends HttpServlet {
                 Map<String, String> smsParams = new HashMap<String, String>();
                 smsParams.put("To", toPhone);
                 smsParams.put("From", TWILIO_NUMBER);
-                smsParams.put("Body", checkAlarm);
+                smsParams.put("Body", "Number of readings: "+numOfReadings);
                 smsFactory.create(smsParams);
             }catch(TwilioRestException e){
                 e.printStackTrace();
