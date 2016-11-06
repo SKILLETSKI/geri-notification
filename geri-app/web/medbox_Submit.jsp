@@ -4,6 +4,10 @@
     Author     : ASUS
 --%>
 
+<%@page import="org.apache.http.impl.client.DefaultHttpClient"%>
+<%@page import="org.apache.http.client.HttpClient"%>
+<%@page import="org.apache.http.HttpResponse"%>
+<%@page import="org.apache.http.client.methods.HttpGet"%>
 <%@page import="com.twilio.sdk.resource.instance.Account"%>
 <%@page import="com.twilio.sdk.TwilioRestClient"%>
 <%@page import="java.util.Map"%>
@@ -17,12 +21,12 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
-    MedboxEventController medboxEventController = (MedboxEventController) session.getAttribute("medboxEventController");
+    //MedboxEventController medboxEventController = (MedboxEventController) session.getAttribute("medboxEventController");
     ArrayList<String> valuesList = (ArrayList<String>) session.getAttribute("values");
     String patientId = valuesList.get(0);
     String thresholdNo = valuesList.get(1);
-    String NumDosage = valuesList.get(2);
-    String NumMissed = valuesList.get(3);
+    String numDosage = valuesList.get(2);
+    String numMissed = valuesList.get(3);
 
     String toPhone = "+6586568835";
     String TWILIO_ACCOUNT_SID = "ACec01a875b5cc448f2b2e903087059d29";
@@ -67,15 +71,14 @@
 
         }
 
-        <%            medboxEventController.startTimer();
-            String checkAlarm = medboxEventController.soundAlarm();
+        <%  
 
-            SmsFactory smsFactory = userAccount.getSmsFactory();
-            Map<String, String> smsParams = new HashMap<String, String>();
-            smsParams.put("To", toPhone);
-            smsParams.put("From", TWILIO_NUMBER);
-            smsParams.put("Body", checkAlarm);
-            smsFactory.create(smsParams);
+            //SmsFactory smsFactory = userAccount.getSmsFactory();
+            //Map<String, String> smsParams = new HashMap<String, String>();
+            //smsParams.put("To", toPhone);
+            //smsParams.put("From", TWILIO_NUMBER);
+            //smsParams.put("Body", checkAlarm);
+            //smsFactory.create(smsParams);
 
         %>
 
@@ -115,6 +118,13 @@
             countdown();
         </script>
         <%
+            int threshold = Integer.parseInt(thresholdNo)*60*1000;
+            int numOfTakes = Integer.parseInt(numDosage);
+            int numOfMissed = Integer.parseInt(numMissed);
+            //change this...
+            HttpClient client = new DefaultHttpClient();
+            HttpGet newRequest = new HttpGet("http://restUrl");
+            HttpResponse thisResponse = client.execute(newRequest);
         %>
         <div>
             <!--BEGIN THEME SETTING-->

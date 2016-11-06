@@ -16,8 +16,8 @@
         <servlet-class>geriapp.servlets.MedboxServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>DemoServlet</servlet-name>
-        <servlet-class>geriapp.servlets.DemoServlet</servlet-class>
+        <servlet-name>MedboxTimerServlet</servlet-name>
+        <servlet-class>geriapp.servlets.MedboxTimerServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>BootstrapServlet</servlet-name>
@@ -32,8 +32,8 @@
         <url-pattern>/incomingsms</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>DemoServlet</servlet-name>
-        <url-pattern>/DemoServlet</url-pattern>
+        <servlet-name>MedboxTimerServlet</servlet-name>
+        <url-pattern>/MedboxTimer</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -36,12 +36,12 @@
 //            TwilioRestClient twilioClient = new TwilioRestClient(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN);
 //            Account userAccount = twilioClient.getAccount();
 
-            MedboxEventController medboxEventController = new MedboxEventController();
-            //set medbox rule first
-            int threshold = Integer.parseInt(thresholdNo)*60*1000;
-            int numOfTakes = Integer.parseInt(numDosage);
-            int numOfMissed = Integer.parseInt(numMissed);
-            medboxEventController.setMedboxEvent(patientId, threshold, numOfTakes, numOfMissed);
+//            MedboxEventController medboxEventController = new MedboxEventController();
+//            //set medbox rule first
+//            int threshold = Integer.parseInt(thresholdNo)*60*1000;
+//            int numOfTakes = Integer.parseInt(numDosage);
+//            int numOfMissed = Integer.parseInt(numMissed);
+//            medboxEventController.setMedboxEvent(patientId, threshold, numOfTakes, numOfMissed);
             
             ArrayList<String> valueList = new ArrayList<>();
             valueList.add(patientId);
@@ -54,7 +54,8 @@
             if(!patientId.equals(null) && !thresholdNo.equals(null) && !numDosage.equals(null) && !numMissed.equals(null) ){
                 
                 session.setAttribute("values", valueList);
-                session.setAttribute("medboxEventController",medboxEventController);
+//                session.setAttribute("medboxEventController", medboxEventController);
+
 //                medboxEventController.startTimer();
 //                String checkAlarm = medboxEventController.soundAlarm();
 //                

@@ -55,6 +55,25 @@ public class MedboxEventController {
         mbReadThread.setRun(false);
         return latestMedboxReadings.size();
     }
+    
+    
+    public int startTimer(int threshold) {
+        long startTimer = System.currentTimeMillis();
+        long elapsedTimer = 0;
+        
+        Timestamp startTimestamp = new Timestamp(startTimer);
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(startTimestamp.getTime());
+        cal.add(Calendar.MILLISECOND,threshold);
+        Timestamp endTimestamp = new Timestamp(cal.getTime().getTime());
+
+        while (elapsedTimer < threshold) {
+            elapsedTimer = (new Date()).getTime() - startTimer;
+        } //TODO: identify unique readings and place into ArrayList
+        
+        int result = ReadingDAO.getPastReadingsCountBetween("medbox", startTimestamp, endTimestamp);
+        return result;
+    }
 
     public String soundAlarm() {
         if (latestMedboxReadings != null && !latestMedboxReadings.isEmpty()) {
