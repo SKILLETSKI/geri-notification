@@ -30,12 +30,12 @@
     String numDosage = valuesList.get(2);
     String numMissed = valuesList.get(3);
 
-    String toPhone = "+6586568835";
-    String TWILIO_ACCOUNT_SID = "ACec01a875b5cc448f2b2e903087059d29";
-    String TWILIO_AUTH_TOKEN = "16f2063d70f35433fb14a141c308becf";
-    String TWILIO_NUMBER = "+447481337150";
-    TwilioRestClient twilioClient = new TwilioRestClient(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN);
-    Account userAccount = twilioClient.getAccount();
+    //String toPhone = "+6586568835";
+    //String TWILIO_ACCOUNT_SID = "ACec01a875b5cc448f2b2e903087059d29";
+    //String TWILIO_AUTH_TOKEN = "16f2063d70f35433fb14a141c308becf";
+    //String TWILIO_NUMBER = "+447481337150";
+    //TwilioRestClient twilioClient = new TwilioRestClient(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN);
+    //Account userAccount = twilioClient.getAccount();
 
 %>
 <html lang="en">
@@ -302,7 +302,7 @@
                                                                     No.  of Dosage</label>
                                                                 <div class="col-md-9">
                                                                     <div class="input-icon right">
-                                                                        <label name="NumDosage" placeholder="" class="form-control"><%=NumDosage%></label></div>
+                                                                        <label name="NumDosage" placeholder="" class="form-control"><%=numOfTakes%></label></div>
                                                                 </div>
                                                             </div>
                                                             <div class="form-group">
@@ -310,7 +310,7 @@
                                                                     No. of Missed</label>
                                                                 <div class="col-md-9">
                                                                     <div class="input-icon right">
-                                                                        <label name="NumMissed" placeholder="" class="form-control"><%=NumMissed%></label></div>
+                                                                        <label name="NumMissed" placeholder="" class="form-control"><%=numOfMissed%></label></div>
                                                                 </div>
                                                             </div>
                                                             <div class="form-group">

@@ -84,6 +84,7 @@ public class MedboxTimerServlet extends HttpServlet {
         int numOfTakes = Integer.parseInt(request.getParameter("numOfTakes"));
         int numOfMissed = Integer.parseInt(request.getParameter("numOfMissed"));
         
+        
         String toPhone = "+6586568835";
         String TWILIO_ACCOUNT_SID = "ACec01a875b5cc448f2b2e903087059d29";
         String TWILIO_AUTH_TOKEN = "16f2063d70f35433fb14a141c308becf";
@@ -96,6 +97,7 @@ public class MedboxTimerServlet extends HttpServlet {
         
         String checkAlarm = medboxEventController.soundAlarm();
         
+        System.out.println(checkAlarm);
         if (numOfReadings < (numOfTakes - numOfMissed)) {
             
             try{
