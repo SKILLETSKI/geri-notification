@@ -136,6 +136,7 @@ public class ReadingDAO {
                     run = false;
                 }
             }
+            mongo.close();
             return results.size();
         }
         return 0; //throw Exception??
