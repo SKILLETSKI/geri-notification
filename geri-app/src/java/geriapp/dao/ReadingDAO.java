@@ -117,6 +117,7 @@ public class ReadingDAO {
                 latestEntry = iterator.next();
                 if (latestEntry==null) {
                     run = false;
+                    size = 121;
                     break;
                 }
                 String json = latestEntry.toJson();
@@ -139,8 +140,8 @@ public class ReadingDAO {
             }
             mongo.close();
             size = results.size();
-            
+            return size;
         }
-        return size; //throw Exception??
+        return 0; //throw Exception??
     }
 }
