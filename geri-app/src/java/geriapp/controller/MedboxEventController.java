@@ -72,7 +72,7 @@ public class MedboxEventController {
             elapsedTimer = (new Date()).getTime() - startTimer;
         } //TODO: identify unique readings and place into ArrayList
         
-        int result = ReadingDAO.getPastReadingsCountBetween("medbox", startTimestamp, endTimestamp);
+        int result = readingDAO.getPastReadingsCountBetween("medbox", startTimestamp, endTimestamp);
         return result;
     }
 

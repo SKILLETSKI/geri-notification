@@ -98,7 +98,7 @@ public class MedboxTimerServlet extends HttpServlet {
         //String checkAlarm = medboxEventController.soundAlarm();
         
         //System.out.println(checkAlarm);
-        if (numOfReadings < (numOfTakes - numOfMissed)) {
+        //if (numOfReadings < (numOfTakes - numOfMissed)) {
             
             try{
                 SmsFactory smsFactory = userAccount.getSmsFactory();
@@ -111,7 +111,7 @@ public class MedboxTimerServlet extends HttpServlet {
                 e.printStackTrace();
             }
             
-        }
+        //}
     }
 
     /**
