@@ -4,7 +4,9 @@
     Author     : ASUS
 --%>
 
-<%@page import="org.apache.http.impl.client.DefaultHttpClient"%>
+<%@page import="org.apache.http.impl.client.CloseableHttpClient"%>
+<%@page import="org.apache.http.impl.client.HttpClientBuilder"%>
+<%@page import="java.io.IOException"%>
 <%@page import="org.apache.http.client.HttpClient"%>
 <%@page import="org.apache.http.HttpResponse"%>
 <%@page import="org.apache.http.client.methods.HttpGet"%>
@@ -121,8 +123,8 @@
             int threshold = Integer.parseInt(thresholdNo)*1000;
             int numOfTakes = Integer.parseInt(numDosage);
             int numOfMissed = Integer.parseInt(numMissed);
-            //change this...
-            HttpClient client = new DefaultHttpClient();
+            
+            HttpClient client = HttpClientBuilder.create().build();
             HttpGet newRequest = new HttpGet("http://default-environment.bxypxxac43.ap-southeast-1.elasticbeanstalk.com/MedboxTimer?threshold="+threshold+"&numOfTakes="+numOfTakes+"&numOfMissed="+numOfMissed);
             
             HttpResponse thisResponse = client.execute(newRequest);
