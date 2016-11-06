@@ -54,7 +54,7 @@ public class TwilioServlet extends HttpServlet {
         String output;
 
         try{
-                output = processMessage(body);
+                output = processMessage(phone, body);
             
         } catch (Exception e) {
             output = "We were unable to process your request!";
@@ -74,12 +74,14 @@ public class TwilioServlet extends HttpServlet {
         }
     }
 
-    private String processMessage(String message){
+    private String processMessage(String phone, String message){
         
         String output = "Caregiver: Jessica Bong, The command that you input is incorrect. Please input if you are\n1. Available\n2. Unavailable";
-
+        
+        
         if (message.equals("1")) {
-            return "Caregiver: Jessica Bong, you have confirmed that you will address\nissue 121: Patient [S123 - Tommy Tan] has not taken medication from 1000 - 1400 hrs";
+            return phone;
+            //return "Caregiver: Jessica Bong, you have confirmed that you will address\nissue 121: Patient [S123 - Tommy Tan] has not taken medication from 1000 - 1400 hrs";
         }else if(message.equals("2")){
             
             try{
@@ -94,7 +96,8 @@ public class TwilioServlet extends HttpServlet {
                 Map<String, String> smsParams = new HashMap<String, String>();
                 smsParams.put("To", toPhone);
                 smsParams.put("From", TWILIO_NUMBER);
-                smsParams.put("Body", "Jessica Bong UNABLE to attend\nissue121: Patient [S123-Tommy Tan] not taken medication from 1000-1400 hrs.\nCaregiver: Elizabeth Ong, Attend? 1.Yes\n2.No");
+                //smsParams.put("Body", "Jessica Bong UNABLE to attend\nissue121: Patient [S123-Tommy Tan] not taken medication from 1000-1400 hrs.\nCaregiver: Elizabeth Ong, Attend? 1.Yes\n2.No");
+                smsParams.put("Body", phone); 
                 smsFactory.create(smsParams);
                 return "Caregiver: Jessica Bong, confirmed UNABLE to address\nissue121: Patient [S123-Tommy Tan] has not taken medication from 1000 - 1400 hrs. \nIssue Escalated";
             }catch(TwilioRestException e){
@@ -104,8 +107,10 @@ public class TwilioServlet extends HttpServlet {
             
             
         }else{
-            return output;
+            return phone;
+            //return output;
         }
+        
         
         
     }
