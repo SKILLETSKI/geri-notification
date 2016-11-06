@@ -123,7 +123,8 @@
             int numOfMissed = Integer.parseInt(numMissed);
             //change this...
             HttpClient client = new DefaultHttpClient();
-            HttpGet newRequest = new HttpGet("http://restUrl");
+            HttpGet newRequest = new HttpGet("http://default-environment.bxypxxac43.ap-southeast-1.elasticbeanstalk.com/MedboxTimer?threshold="+threshold+"&numOfTakes="+numOfTakes+"&numOfMissed="+numOfMissed);
+            
             HttpResponse thisResponse = client.execute(newRequest);
         %>
         <div>
