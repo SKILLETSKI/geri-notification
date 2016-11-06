@@ -15,11 +15,25 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Map;
+import java.util.HashMap;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.twilio.sdk.TwilioRestClient;
+import com.twilio.sdk.TwilioRestException;
+import com.twilio.sdk.resource.instance.Account;
+import com.twilio.sdk.resource.factory.SmsFactory;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.methods.HttpUriRequest;
+import org.apache.commons.logging.LogFactory;
+import org.apache.commons.lang3.time.FastDateFormat;
+import org.apache.commons.codec.binary.Base64;
+import org.codehaus.jackson.JsonParseException;
+import org.codehaus.jackson.map.JsonMappingException;
 
 /**
  *
@@ -70,11 +84,31 @@ public class MedboxTimerServlet extends HttpServlet {
         int numOfTakes = Integer.parseInt(request.getParameter("numOfTakes"));
         int numOfMissed = Integer.parseInt(request.getParameter("numOfMissed"));
         
+        String toPhone = "+6586568835";
+        String TWILIO_ACCOUNT_SID = "ACec01a875b5cc448f2b2e903087059d29";
+        String TWILIO_AUTH_TOKEN = "16f2063d70f35433fb14a141c308becf";
+        String TWILIO_NUMBER = "+447481337150";
+        TwilioRestClient twilioClient = new TwilioRestClient(TWILIO_ACCOUNT_SID, TWILIO_AUTH_TOKEN);
+        Account userAccount = twilioClient.getAccount();
+        
         MedboxEventController medboxEventController = new MedboxEventController();
         int numOfReadings = medboxEventController.startTimer(threshold);
         
+        String checkAlarm = medboxEventController.soundAlarm();
+        
         if (numOfReadings < (numOfTakes - numOfMissed)) {
-            //send SMS
+            
+            try{
+                SmsFactory smsFactory = userAccount.getSmsFactory();
+                Map<String, String> smsParams = new HashMap<String, String>();
+                smsParams.put("To", toPhone);
+                smsParams.put("From", TWILIO_NUMBER);
+                smsParams.put("Body", checkAlarm);
+                smsFactory.create(smsParams);
+            }catch(TwilioRestException e){
+                e.printStackTrace();
+            }
+            
         }
     }
 
