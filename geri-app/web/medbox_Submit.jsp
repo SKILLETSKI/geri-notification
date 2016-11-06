@@ -19,6 +19,7 @@
 <%@page import="java.util.Timer"%>
 <%@page import="java.util.TimerTask"%>
 <%@page import="geriapp.controller.MedboxEventController"%>
+<%@page import="org.apache.http.client.ClientProtocolException"%>"
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -124,10 +125,13 @@
             int numOfTakes = Integer.parseInt(numDosage);
             int numOfMissed = Integer.parseInt(numMissed);
             
-            HttpClient client = HttpClientBuilder.create().build();
+            CloseableHttpClient client = HttpClientBuilder.create().build();
             HttpGet newRequest = new HttpGet("http://default-environment.bxypxxac43.ap-southeast-1.elasticbeanstalk.com/MedboxTimer?threshold="+threshold+"&numOfTakes="+numOfTakes+"&numOfMissed="+numOfMissed);
-            
-            HttpResponse thisResponse = client.execute(newRequest);
+            try{
+                HttpResponse thisResponse = client.execute(newRequest);
+            }catch(ClientProtocolException e){
+                e.printStackTrace();
+            }
         %>
         <div>
             <!--BEGIN THEME SETTING-->
