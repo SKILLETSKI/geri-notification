@@ -111,8 +111,14 @@ public class MedboxTimerServlet extends HttpServlet {
         MedboxEventController medboxEventController = new MedboxEventController();
         int numOfReadings = medboxEventController.startTimer(threshold);
         
-        //String checkAlarm = medboxEventController.soundAlarm();
-        
+        String checkAlarm = "";
+        if (numOfReadings > 0) {
+                
+                checkAlarm = "Patient [S123 - Tommy Tan] has NOT taken medication from 1000 - 1400 hrs. Please input if you are\n1. Available\n2. Unavailable";
+        } else {
+                
+                checkAlarm = "Patient [S123 - Tommy Tan] taking medication from 1000 - 1400 hrs as per normal";
+        }
         //System.out.println(checkAlarm);
         //if (numOfReadings < (numOfTakes - numOfMissed)) {
             
