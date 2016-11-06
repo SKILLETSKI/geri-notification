@@ -102,7 +102,7 @@ public class ReadingDAO {
         MongoClient mongo = new MongoClient("54.254.204.169", 27017);
 
         MongoDatabase db = mongo.getDatabase("GERI");
-
+        int size = 0;
         MongoCollection<Document> newColl;
 
         Gson gson = new Gson();
@@ -117,6 +117,7 @@ public class ReadingDAO {
                 latestEntry = iterator.next();
                 if (latestEntry==null) {
                     run = false;
+                    size = 121;
                     break;
                 }
                 String json = latestEntry.toJson();
@@ -138,7 +139,8 @@ public class ReadingDAO {
                 }
             }
             mongo.close();
-            return results.size();
+            size = results.size();
+            return size;
         }
         return 0; //throw Exception??
     }
