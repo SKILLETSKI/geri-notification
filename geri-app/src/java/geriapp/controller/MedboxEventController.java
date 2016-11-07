@@ -67,7 +67,7 @@ public class MedboxEventController {
         Calendar startCal = Calendar.getInstance(timeZone);
         long startTimer = startCal.getTimeInMillis();
         
-        Timestamp startTimestamp = new Timestamp(startTimer - 30000);
+        Timestamp startTimestamp = new Timestamp(startTimer - 60000);
         System.out.println(startTimestamp.toString());
         Calendar endCal = Calendar.getInstance(timeZone);
         
