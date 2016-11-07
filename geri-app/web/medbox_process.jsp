@@ -61,7 +61,7 @@
             int numOfMissed = Integer.parseInt(numMissed);
             
             CloseableHttpClient client = HttpClients.createDefault();
-            HttpPost httpPost = new HttpPost("http://www.example.com");
+            HttpPost httpPost = new HttpPost("http://default-environment.bxypxxac43.ap-southeast-1.elasticbeanstalk.com/MedboxTimer");
 
             List<NameValuePair> params = new ArrayList<NameValuePair>();
             params.add(new BasicNameValuePair("threshold", ""+threshold));
