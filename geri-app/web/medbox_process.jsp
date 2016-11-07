@@ -14,9 +14,11 @@
 <%@page import="org.apache.http.impl.client.HttpClientBuilder"%>
 <%@page import="java.io.IOException"%>
 <%@page import="org.apache.http.client.HttpClient"%>
+
 <%@page import="org.apache.http.message.BasicNameValuePair"%>
 <%@page import="org.apache.http.client.entity.UrlEncodedFormEntity"%>
 <%@page import="org.apache.http.client.methods.HttpPost"%>
+<%@page import="org.apache.http.client.methods.CloseableHttpResponse"%>
 <%@page import="org.apache.http.impl.client.HttpClients"%>
 <%@page import="org.apache.http.HttpResponse"%>
 <%@page import="org.apache.http.client.methods.HttpGet"%>
@@ -58,18 +60,20 @@
             int numOfTakes = Integer.parseInt(numDosage);
             int numOfMissed = Integer.parseInt(numMissed);
             
-            HttpClient httpclient = HttpClients.createDefault();
-            HttpPost httppost = new HttpPost("http://default-environment.bxypxxac43.ap-southeast-1.elasticbeanstalk.com/MedboxTimer");
+            CloseableHttpClient client = HttpClients.createDefault();
+            HttpPost httpPost = new HttpPost("http://www.example.com");
 
-            // Request parameters and other properties.
-            List<NameValuePair> params = new ArrayList<NameValuePair>(2);
+            List<NameValuePair> params = new ArrayList<NameValuePair>();
             params.add(new BasicNameValuePair("threshold", ""+threshold));
             params.add(new BasicNameValuePair("numOfTakes", ""+numOfTakes));
             params.add(new BasicNameValuePair("numOfMissed", ""+numOfMissed));
-            httppost.setEntity(new UrlEncodedFormEntity(params));
-
-            //Execute and get the response.
-            httpclient.execute(httppost);
+            httpPost.setEntity(new UrlEncodedFormEntity(params));
+            
+            CloseableHttpResponse servletResponse = client.execute(httpPost);
+            client.close();
+            
+                    // add header
+		
             /*
             CloseableHttpClient client = HttpClientBuilder.create().build();
             HttpGet newRequest = new HttpGet("http://default-environment.bxypxxac43.ap-southeast-1.elasticbeanstalk.com/MedboxTimer?threshold="+threshold+"&numOfTakes="+numOfTakes+"&numOfMissed="+numOfMissed);

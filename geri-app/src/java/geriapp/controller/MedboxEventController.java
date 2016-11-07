@@ -67,11 +67,11 @@ public class MedboxEventController {
         Calendar startCal = Calendar.getInstance(timeZone);
         long startTimer = startCal.getTimeInMillis();
         
-        Timestamp startTimestamp = new Timestamp(startTimer - 10000);
+        Timestamp startTimestamp = new Timestamp(startTimer - 30000);
         System.out.println(startTimestamp.toString());
         Calendar endCal = Calendar.getInstance(timeZone);
         
-        Timestamp endTimestamp = new Timestamp(startTimer + threshold);
+        Timestamp endTimestamp = new Timestamp(startTimer + threshold + 30000);
         System.out.println(endTimestamp.toString());
         while (elapsedTimer < threshold) {
             elapsedTimer = (new Date()).getTime() - startTimer;

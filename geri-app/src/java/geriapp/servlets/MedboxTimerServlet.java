@@ -113,11 +113,9 @@ public class MedboxTimerServlet extends HttpServlet {
         
         String checkAlarm = "";
         if (numOfReadings > 0) {
-                
-                checkAlarm = "Patient [S123 - Tommy Tan] has NOT taken medication from 1000 - 1400 hrs. Please input if you are\n1. Available\n2. Unavailable";
-        } else {
-                
                 checkAlarm = "Patient [S123 - Tommy Tan] taking medication from 1000 - 1400 hrs as per normal";
+        } else {
+                checkAlarm = "Patient [S123 - Tommy Tan] has NOT taken medication from 1000 - 1400 hrs. Please input if you are\n1. Available\n2. Unavailable";
         }
         //System.out.println(checkAlarm);
         //if (numOfReadings < (numOfTakes - numOfMissed)) {
@@ -127,7 +125,7 @@ public class MedboxTimerServlet extends HttpServlet {
                 Map<String, String> smsParams = new HashMap<String, String>();
                 smsParams.put("To", toPhone);
                 smsParams.put("From", TWILIO_NUMBER);
-                smsParams.put("Body", "Number of readings: "+numOfReadings);
+                smsParams.put("Body", checkAlarm);
                 smsFactory.create(smsParams);
             }catch(TwilioRestException e){
                 e.printStackTrace();
