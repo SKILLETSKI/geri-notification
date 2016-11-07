@@ -61,13 +61,13 @@
             int numOfMissed = Integer.parseInt(numMissed);
             
             CloseableHttpClient client = HttpClients.createDefault();
-            HttpPost httpPost = new HttpPost("http://default-environment.bxypxxac43.ap-southeast-1.elasticbeanstalk.com/MedboxTimer");
+            HttpPost httpPost = new HttpPost("http://default-environment.bxypxxac43.ap-southeast-1.elasticbeanstalk.com/MedboxTimer?threshold="+threshold+"&numOfTakes="+numOfTakes+"&numOfMissed="+numOfMissed);
 
-            List<NameValuePair> params = new ArrayList<NameValuePair>();
-            params.add(new BasicNameValuePair("threshold", ""+threshold));
-            params.add(new BasicNameValuePair("numOfTakes", ""+numOfTakes));
-            params.add(new BasicNameValuePair("numOfMissed", ""+numOfMissed));
-            httpPost.setEntity(new UrlEncodedFormEntity(params));
+//            List<NameValuePair> params = new ArrayList<NameValuePair>();
+//            params.add(new BasicNameValuePair("threshold", ""+threshold));
+//            params.add(new BasicNameValuePair("numOfTakes", ""+numOfTakes));
+//            params.add(new BasicNameValuePair("numOfMissed", ""+numOfMissed));
+//            httpPost.setEntity(new UrlEncodedFormEntity(params));
             
             CloseableHttpResponse servletResponse = client.execute(httpPost);
             client.close();
