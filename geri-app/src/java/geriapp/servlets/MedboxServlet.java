@@ -87,9 +87,10 @@ public class MedboxServlet extends HttpServlet {
         } catch (Exception e) {
         }
         
+        
         //Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
-        Gson gson = new Gson();
-
+        Gson gson = new Gson(); 
+        
         MedboxReading reading = gson.fromJson(sb.toString(), MedboxReading.class);
         ReadingDAO.storeReading(reading);
     }
