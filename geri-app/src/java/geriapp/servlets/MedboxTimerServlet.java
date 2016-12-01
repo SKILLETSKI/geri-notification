@@ -109,7 +109,7 @@ public class MedboxTimerServlet extends HttpServlet {
         Account userAccount = twilioClient.getAccount();
         
         MedboxEventController medboxEventController = new MedboxEventController();
-        int numOfReadings = medboxEventController.startTimer(threshold);
+        int numOfReadings = medboxEventController.startTimer(30000);
         
         String checkAlarm = "";
         if (numOfReadings > 0) {

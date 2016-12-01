@@ -29,33 +29,30 @@ public class MedboxEventController {
     private ArrayList<Reading> latestMedboxReadings = new ArrayList<Reading>();
     
     //consider adding a Medbox class for different medboxes
-
+    /*
     public int startTimer() {
-        long startTimer = System.currentTimeMillis();
+        
         long elapsedTimer = 0;
         
-        Timestamp startTimestamp = new Timestamp(startTimer);
-        Calendar cal = Calendar.getInstance();
-        cal.setTimeInMillis(startTimestamp.getTime());
-        cal.add(Calendar.MILLISECOND,medboxEvent.getThreshold());
-        Timestamp endTimestamp = new Timestamp(cal.getTime().getTime());
+        TimeZone timeZone = TimeZone.getTimeZone("GMT+8");
         
-        mbReadThread = new MedboxReadThread(startTimestamp,endTimestamp);
-        Thread medboxTimerThread = new Thread(mbReadThread);
-        medboxTimerThread.start();
-
-        while (elapsedTimer < medboxEvent.getThreshold()) {
-            Reading reading = mbReadThread.getMbReading();
-            if (!latestMedboxReadings.contains(reading) && reading != null) {
-                latestMedboxReadings.add(reading);
-            }
+        Calendar startCal = Calendar.getInstance(timeZone);
+        long startTimer = startCal.getTimeInMillis();
+        
+        Timestamp startTimestamp = new Timestamp(startTimer - 80000);
+        System.out.println(startTimestamp.toString());
+        Calendar endCal = Calendar.getInstance(timeZone);
+        
+        Timestamp endTimestamp = new Timestamp(startTimer + threshold);
+        System.out.println(endTimestamp.toString());
+        while (elapsedTimer < threshold) {
             elapsedTimer = (new Date()).getTime() - startTimer;
         } //TODO: identify unique readings and place into ArrayList
         
-        mbReadThread.setRun(false);
-        return latestMedboxReadings.size();
+        int result = readingDAO.getPastReadingsCountBetween("medbox", startTimestamp, endTimestamp);
+        return result;
     }
-    
+    */
     
     public int startTimer(int threshold) {
         
@@ -67,11 +64,11 @@ public class MedboxEventController {
         Calendar startCal = Calendar.getInstance(timeZone);
         long startTimer = startCal.getTimeInMillis();
         
-        Timestamp startTimestamp = new Timestamp(startTimer - 60000);
+        Timestamp startTimestamp = new Timestamp(startTimer - 80000);
         System.out.println(startTimestamp.toString());
         Calendar endCal = Calendar.getInstance(timeZone);
         
-        Timestamp endTimestamp = new Timestamp(startTimer + threshold + 30000);
+        Timestamp endTimestamp = new Timestamp(startTimer + threshold + 20000);
         System.out.println(endTimestamp.toString());
         while (elapsedTimer < threshold) {
             elapsedTimer = (new Date()).getTime() - startTimer;
