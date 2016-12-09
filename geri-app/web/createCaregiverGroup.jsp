@@ -1,6 +1,6 @@
 <%-- 
-    Document   : home
-    Created on : Nov 2, 2016, 3:44:55 AM
+    Document   : creatingGroup
+    Created on : Dec 6, 2016, 2:56:48 PM
     Author     : ASUS
 --%>
 
@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Gerification | Homepage</title>
+        <title>Gerification | Create Group</title>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -130,7 +130,7 @@
                         <ul id="side-menu" class="nav">
 
                             <div class="clearfix"></div>
-                            <li class="active"><a href="dashboard.html"><i class="fa fa-tachometer fa-fw">
+                            <li class="active"><a href="home.jsp"><i class="fa fa-tachometer fa-fw">
                                         <div class="icon-bg bg-orange"></div>
                                     </i><span class="menu-title">Dashboard</span></a></li>
                             <li><a href="patientData.jsp"><i class="fa fa-desktop fa-fw">
@@ -155,12 +155,12 @@
                     <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
                         <div class="page-header pull-left">
                             <div class="page-title">
-                                Dashboard</div>
+                                Caregiver Group</div>
                         </div>
                         <ol class="breadcrumb page-breadcrumb pull-right">
                             <li><i class="fa fa-home"></i>&nbsp;<a href="home.jsp">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                            <li class="hidden"><a href="#">Dashboard</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
-                            <li class="active">Dashboard</li>
+                            <li class="hidden"><a href="#">Caregiver Group</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+                            <li class="active">Caregiver Group</li>
                         </ol>
                         <div class="clearfix">
                         </div>
@@ -170,94 +170,84 @@
                     <div class="page-content">
                         <div id="tab-general">
                             <div id="sum_box" class="row mbl">
-                                <div class="col-sm-6 col-md-3">
-                                    <div class="panel profit db mbm">
-                                        <div class="panel-body">
-                                            <p class="icon">
-
-                                            </p>
-                                            <h4 class="value">
-                                            </h4>
-                                            <p class="description">
-                                                Notification</p>
-                                            <div class="progress progress-sm mbn">
-                                                <div role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"
-                                                     style="width: 80%;" class="progress-bar progress-bar-success">
-                                                    <span class="sr-only">80% Complete (success)</span></div>
-                                            </div>
+                                <div class="col-md-2 col-lg-2"></div>
+                                <div class="col-md-6 col-lg-8">
+                                    <div class="panel panel-grey">
+                                        <div class="panel-heading">
+                                            Create Caregiver Group</div>
+                                        <div class="panel-body pan">
+                                            <form action="CaregiverGroupController.jsp" method = post>
+                                                <div class="form-body pal">
+                                                    <div class="row">                                                        
+                                                        <div class="col-lg-4">
+                                                            <div class="form-group">
+                                                                <div class="text-center mbl"><img src="http://www.clacksweb.org.uk/images/icons/elderly.gif" alt="" class="Patient_Img"/></div>
+                                                                <div class="text-center mbl"><a href="#" class="btn btn-warning"><i class="fa fa-search"></i>&nbsp; Search</a></div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-lg-8">                                                            
+                                                            <div class="form-group">                                                                
+                                                                <div class="input-icon">
+                                                                    <i class="fa fa-user"></i>
+                                                                    <input id="inputPatientName" type="text" placeholder="Patient Name" class="form-control"/>
+                                                                </div>                                                                
+                                                            </div>
+                                                            <div class="form-group">
+                                                                  <div class="input-icon">
+                                                                    <i class="fa fa-book"></i>
+                                                                    <input id="inputNRIC" type="text" placeholder="NRIC" class="form-control"/>
+                                                                  </div>                                                            
+                                                           </div>                                                            
+                                                            <div class="form-group">
+                                                                <label class="pts">Caregivers</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>                                            
+                                                   
+                                                    <div class="form-group">
+                                                        <textarea rows="5" placeholder="Additional info" class="form-control"></textarea></div>
+                                                    <hr />                                                    
+                                                    
+                                                    <div class="row">
+                                                        <div class="col-md-9">
+                                                            <div class="form-group">
+                                                                <input id="inputCardNumber" type="text" placeholder="Card number" class="form-control" /></div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="form-group">
+                                                                <input id="inputCVV2" type="text" placeholder="CVV2" class="form-control" /></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-md-4">
+                                                            <div class="form-group mbn">
+                                                                <label class="pts">
+                                                                    Expiration date</label></div>
+                                                        </div>
+                                                        <div class="col-md-5">
+                                                            <div class="form-group">
+                                                                <select class="form-control">
+                                                                    <option>Month</option>
+                                                                </select></div>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <div class="form-group mbn">
+                                                                <input id="inputYear" type="text" placeholder="Year" class="form-control" /></div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="form-actions text-right pal">
+                                                    <button type="submit" class="btn btn-primary">
+                                                        Create</button>
+                                                </div>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-sm-6 col-md-3">
-                                    <div class="panel income db mbm">
-                                        <div class="panel-body">
-                                            <p class="icon">
 
-                                            </p>
-                                            <h4 class="value">
-                                            </h4>
-                                            <p class="description">
-                                                Notification</p>
-                                            <div class="progress progress-sm mbn">
-                                                <div role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"
-                                                     style="width: 80%;" class="progress-bar progress-bar-success">
-                                                    <span class="sr-only">80% Complete (success)</span></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-3">
-                                    <div class="panel task db mbm">
-                                        <div class="panel-body">
-                                            <p class="icon">
 
-                                            </p>
-                                            <h4 class="value">
-                                            </h4>
-                                            <p class="description">
-                                                Notification</p>
-                                            <div class="progress progress-sm mbn">
-                                                <div role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"
-                                                     style="width: 80%;" class="progress-bar progress-bar-success">
-                                                    <span class="sr-only">80% Complete (success)</span></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-3">
-                                    <div class="panel visit db mbm">
-                                        <div class="panel-body">
-                                            <p class="icon">
-
-                                            </p>
-                                            <h4 class="value">
-                                            </h4>
-                                            <p class="description">
-                                                Notification</p>
-                                            <div class="progress progress-sm mbn">
-                                                <div role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"
-                                                     style="width: 80%;" class="progress-bar progress-bar-success">
-                                                    <span class="sr-only">80% Complete (success)</span></div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
-                            <div id="sum_box" class="row mbl">
-                                
-                                <div class="col-sm-6 col-md-12">
-                                    <div class="panel visit db mbm">
-                                        <div class="panel-body">
-                                            <p class="icon">
 
-                                            </p>
-                                            <h4 class="value">
-                                            </h4>
-                                                <a href="createCaregiverGroup.jsp" class="btn btn-primary btn-sm" role="button">Create Caregiver Group</a>
-                                            </div>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                     <!--END CONTENT-->
