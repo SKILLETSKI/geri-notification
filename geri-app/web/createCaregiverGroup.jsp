@@ -29,6 +29,7 @@
         <link type="text/css" rel="stylesheet" href="styles/zabuto_calendar.min.css">
         <link type="text/css" rel="stylesheet" href="styles/pace.css">
         <link type="text/css" rel="stylesheet" href="styles/jquery.news-ticker.css">
+
     </head>
     <body>
         <div>
@@ -176,70 +177,77 @@
                                         <div class="panel-heading">
                                             Create Caregiver Group</div>
                                         <div class="panel-body pan">
-                                            <form action="CaregiverGroupController.jsp" method = post>
+                                            <form action="caregiverGroupServlet" method ="get" >
                                                 <div class="form-body pal">
-                                                    <div class="row">                                                        
-                                                        <div class="col-lg-4">
-                                                            <div class="form-group">
-                                                                <div class="text-center mbl"><img src="http://www.clacksweb.org.uk/images/icons/elderly.gif" alt="" class="Patient_Img"/></div>
-                                                                <div class="text-center mbl"><a href="#" class="btn btn-warning"><i class="fa fa-search"></i>&nbsp; Search</a></div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-8">                                                            
+                                                    <div class="row">
+                                                        <div class="col-lg-8">
+                                                            <%
+                                                                String error = (String) request.getAttribute("errorMsg");
+
+                                                                if (error != null) {
+                                                                    out.println("<div class='alert alert-warning'><strong>");
+                                                                    out.println(error);
+                                                                    out.println("</strong></div>");
+                                                                }
+                                                            %>
                                                             <div class="form-group">                                                                
                                                                 <div class="input-icon">
                                                                     <i class="fa fa-user"></i>
-                                                                    <input id="inputPatientName" type="text" placeholder="Patient Name" class="form-control"/>
+                                                                    <input name="inputPatientName" type="text" placeholder="Patient Name" class="form-control"/>
                                                                 </div>                                                                
                                                             </div>
                                                             <div class="form-group">
-                                                                  <div class="input-icon">
+                                                                <div class="input-icon">
                                                                     <i class="fa fa-book"></i>
-                                                                    <input id="inputNRIC" type="text" placeholder="NRIC" class="form-control"/>
-                                                                  </div>                                                            
-                                                           </div>                                                            
+                                                                    <input name="inputPatientNRIC" type="text" placeholder="NRIC" class="form-control"/>
+                                                                </div>                                                            
+                                                            </div>
                                                             <div class="form-group">
-                                                                <label class="pts">Caregivers</label>
+                                                                <div class="input-icon">
+                                                                    <i class="fa fa-phone"></i>
+                                                                    <input name="inputPatientPhone" type="text" placeholder="Contact Number" class="form-control"/>
+                                                                </div>                                                            
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <div class="input-icon">
+                                                                    <i class="fa fa-map-marker"></i>                                                                    
+                                                                    <input name="inputPatientAddress" type="text" placeholder="Address" class="form-control"/>
+                                                                </div>                                                            
+                                                            </div>                                                           
+                                                            <div class="form-group">
+                                                                <div class="input-icon">
+                                                                    <i class="fa fa-list"></i>
+                                                                    <input name="inputPatientInformation" type="text" placeholder="Additional Information" class="form-control"/>
+                                                                </div>                                                            
+                                                            </div>
+                                                            <div class="entry">                                                                
+                                                                <div class="form-group">
+                                                                    <div class="input-group">                                                                  
+                                                                        <input class="form-control" name="fields1" type="text" placeholder="Add Caregiver" />
+                                                                        <span class="input-group-btn">
+                                                                            <button class="btn btn-success btn-add" type="button">
+                                                                                <span class="glyphicon glyphicon-plus"></span>
+                                                                            </button>
+                                                                        </span>  
+                                                                    </div>
+                                                                </div>
+
+                                                            </div>
+                                                            <div class="form-group"> 
+                                                                <button type="submit" class="btn btn-block btn-primary">Create Group</button>                                                                
                                                             </div>
                                                         </div>
-                                                    </div>                                            
-                                                   
-                                                    <div class="form-group">
-                                                        <textarea rows="5" placeholder="Additional info" class="form-control"></textarea></div>
-                                                    <hr />                                                    
-                                                    
-                                                    <div class="row">
-                                                        <div class="col-md-9">
+                                                        <div class="col-lg-4">
                                                             <div class="form-group">
-                                                                <input id="inputCardNumber" type="text" placeholder="Card number" class="form-control" /></div>
-                                                        </div>
-                                                        <div class="col-md-3">
-                                                            <div class="form-group">
-                                                                <input id="inputCVV2" type="text" placeholder="CVV2" class="form-control" /></div>
-                                                        </div>
+                                                                <div class="text-center mbl"><img src="http://www.clacksweb.org.uk/images/icons/elderly.gif" alt="" class="Patient_Img"/></div>
+                                                                <div class="text-center mbl"><label class="btn btn-success btn-block"><input type="file" style="display: none;"><i class="fa fa-upload"></i>&nbsp; Upload Photo</label><input type="text" name="inputPatientPhoto"class="form-control" readonly></div>
+                                                            </div>
+                                                        </div>                                          
                                                     </div>
                                                     <div class="row">
-                                                        <div class="col-md-4">
-                                                            <div class="form-group mbn">
-                                                                <label class="pts">
-                                                                    Expiration date</label></div>
-                                                        </div>
-                                                        <div class="col-md-5">
-                                                            <div class="form-group">
-                                                                <select class="form-control">
-                                                                    <option>Month</option>
-                                                                </select></div>
-                                                        </div>
-                                                        <div class="col-md-3">
-                                                            <div class="form-group mbn">
-                                                                <input id="inputYear" type="text" placeholder="Year" class="form-control" /></div>
-                                                        </div>
                                                     </div>
                                                 </div>
-                                                <div class="form-actions text-right pal">
-                                                    <button type="submit" class="btn btn-primary">
-                                                        Create</button>
-                                                </div>
+
                                             </form>
                                         </div>
                                     </div>
@@ -249,6 +257,7 @@
                             </div>
 
                         </div>
+
                     </div>
                     <!--END CONTENT-->
                     <!--BEGIN FOOTER-->
@@ -278,24 +287,25 @@
         <script src="script/pace.min.js"></script>
         <script src="script/holder.js"></script>
         <script src="script/responsive-tabs.js"></script>
-        <script src="script/jquery.flot.js"></script>
+        <!--<script src="script/jquery.flot.js"></script>
         <script src="script/jquery.flot.categories.js"></script>
         <script src="script/jquery.flot.pie.js"></script>
         <script src="script/jquery.flot.tooltip.js"></script>
         <script src="script/jquery.flot.resize.js"></script>
         <script src="script/jquery.flot.fillbetween.js"></script>
         <script src="script/jquery.flot.stack.js"></script>
-        <script src="script/jquery.flot.spline.js"></script>
+        <script src="script/jquery.flot.spline.js"></script> 
+        <script src="script/index.js"></script> -->
         <script src="script/zabuto_calendar.min.js"></script>
-        <script src="script/index.js"></script>
+
         <!--LOADING SCRIPTS FOR CHARTS-->
-        <script src="script/highcharts.js"></script>
+        <!-- <script src="script/highcharts.js"></script>
         <script src="script/data.js"></script>
         <script src="script/drilldown.js"></script>
         <script src="script/exporting.js"></script>
         <script src="script/highcharts-more.js"></script>
         <script src="script/charts-highchart-pie.js"></script>
-        <script src="script/charts-highchart-more.js"></script>
+        <script src="script/charts-highchart-more.js"></script> -->
         <!--CORE JAVASCRIPT-->
         <script src="script/main.js"></script>
         <script>        (function (i, s, o, g, r, a, m) {
@@ -314,5 +324,64 @@
 
 
         </script>
+        <script>
+            $(function ()
+            {
+                var next = 1;
+                $(document).on('click', '.btn-add', function (e)
+                {
+                    e.preventDefault();
+
+                    //Increment
+                    next = next + 1;
+
+                    var controlForm = $('.panel-body form:first'),
+                            currentEntry = $(this).parents('.form-group:first'),
+                            addNewEntry = $(this).parents('.entry:first'),
+                            newCounterEntry = '<div class="form-group"><div class="input-group"><input class="form-control" name="fields' + next + '" type="text" placeholder="Add Caregiver"/><span class="input-group-btn"><button class="btn btn-success btn-add" type="button"><span class="glyphicon glyphicon-plus"></span></button></span></div></div>',
+                            newEntry = $(newCounterEntry).appendTo(addNewEntry);
+
+                    newEntry.find('input').val('');
+
+                    controlForm.find('.entry .form-group:not(:last) .btn-add')
+                            .removeClass('btn-add').addClass('btn-remove')
+                            .removeClass('btn-success').addClass('btn-danger')
+                            .html('<span class="glyphicon glyphicon-minus"></span>');
+
+                }).on('click', '.btn-remove', function (e)
+                {
+                    $(this).parents('.form-group:first').remove();
+
+                    e.preventDefault();
+                    return false;
+                });
+            });
+            
+            $(function () {
+
+                // We can attach the `fileselect` event to all file inputs on the page
+                $(document).on('change', ':file', function () {
+                    var input = $(this),
+                            numFiles = input.get(0).files ? input.get(0).files.length : 1,
+                            label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+                    input.trigger('fileselect', [numFiles, label]);
+                });
+
+                // We can watch for our custom `fileselect` event like this
+                $(document).ready(function () {
+                    $(':file').on('fileselect', function (event, numFiles, label) {
+
+                        var input = $(this).parents('.form-group').find(':text'),
+                                log = numFiles > 1 ? numFiles + ' files selected' : label;
+                        if (input.length) {
+                            input.val(log);
+                        } 
+
+                    });
+                });
+
+            });
+        </script>
+
     </body>
 </html>

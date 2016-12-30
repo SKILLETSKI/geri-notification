@@ -15,9 +15,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class ConnectionManager {
-    private static final String DRIVER_NAME = "com.mysql.jdbc.Driver";
-    private static final String URL = "jdbc:mysql://localhost/GERI";
-
+     private static final String DRIVER_NAME = "com.mysql.jdbc.Driver";
+    private static final String URL = "jdbc:mysql://fyptetrisdemodb.cshpafji2tup.ap-southeast-1.rds.amazonaws.com:3306/";
+    private static final String DB_NAME = "GERI";
     static {
         try {
             Class.forName(DRIVER_NAME).newInstance();
@@ -27,8 +27,9 @@ public class ConnectionManager {
     }
 
     public static Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(URL, "root", "");
+        return DriverManager.getConnection(URL + DB_NAME, "root", "12345678");
     }
+
     
       /**
    * close the given connection, statement and resultset

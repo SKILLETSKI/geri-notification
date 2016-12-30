@@ -11,37 +11,65 @@ import geriapp.entity.Caregiver;
  *
  * @author AvinashDash
  */
-public class Patient extends Person{
+public class Patient{
     
-    private String patientID;
-    private ArrayList<Caregiver> caregiverList = null;
+    //private String patientID;
+    private String name;
+    private String NRIC;
+    private String phone;
+    private String address;
+    private String notes;
+    private String photo;
+
     
-    public Patient(){
-        this.Name = "";
-        this.caregiverList = new ArrayList<Caregiver>();
-        this.password = "";
-        this.patientID = "";
+    public Patient(String name, String NRIC, String phone, String address,String notes, String photo){
+        this.name = name;
+        this.NRIC = NRIC;        
+        this.phone = phone;
+        this.address = address;
+        this.photo = photo;
+        this.notes = notes;
+      
+    }
+
+    public String getNRIC() {
+        return NRIC;
+    }
+
+    public void setNRIC(String NRIC) {
+        this.NRIC = NRIC;
     }
     
-    public Patient(String Name, ArrayList<Caregiver> caregiverList, String password, String patientID){
-        this.Name = Name;
-        this.caregiverList = caregiverList;
-        this.userName = userName;
-        this.password = password;
-        this.patientID = patientID;
+    public String getName(){
+    	return name;
+    }
+    public void setName(String name){
+    	this.name = name;
+    }
+    public String getAddress(){
+    	return address;
+    }
+    public void setAddress(String address){
+    	this.address = address;
+    }
+    public String getPhone(){
+    	return phone;
+    }
+    public void setPhone(String phone){
+    	this.phone = phone;
+    }
+    public String getNotes(){
+    	return notes;
+    }
+    public void setNotes(String notes){
+    	this.notes = notes;
+    }
+    public String getPhoto(){
+    	return photo;
+    }
+    public void setPhoto(String photo){
+    	this.photo = photo;
     }
     
-    public String getPatientID(){
-        return this.patientID;
-    }
-    
-    public ArrayList<Caregiver> getCaregiverList(){
-        return this.caregiverList;
-    }
-    
-    public void addCaregiver(Caregiver newCaregiver){
-        caregiverList.add(newCaregiver);
-    }
-    
-    
+       
 }
