@@ -47,12 +47,12 @@ public class PatientDAO {
         
         try {
             conn = ConnectionManager.getConnection();
-            pstmt = conn.prepareStatement("SELECT * from Patient where patientNRIC = '?'");
+            pstmt = conn.prepareStatement("SELECT * from patient where patientNRIC = ?");
             pstmt.setString(1, NRIC);
             rs = pstmt.executeQuery();
             rs.next();
             
-            patient = new Patient(rs.getString("name"),rs.getString("patientNRIC"),rs.getString("phone"), rs.getString("address"), rs.getString("note"), rs.getString("photo"));
+            patient = new Patient(rs.getString("name"),rs.getString("patientNRIC"),rs.getString("phone"), rs.getString("address"), rs.getString("notes"), rs.getString("photo"));
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -112,14 +112,14 @@ public class PatientDAO {
         try {
 
             conn = ConnectionManager.getConnection();
-            pstmt = conn.prepareStatement("INSERT INTO patient (patientNRIC, phone, address, name, notes, photo) VALUES ('?','?', '?', '?', '?', '?')");
+            pstmt = conn.prepareStatement("INSERT INTO patient (patientNRIC, phone, address, name, notes, photo) VALUES (?,?,?,?,?,?)");
 
             pstmt.setString(1, patient.getNRIC());
-            pstmt.setString(1, patient.getPhone());
-            pstmt.setString(1, patient.getAddress());
-            pstmt.setString(1, patient.getName());
-            pstmt.setString(1, patient.getNotes());            
-            pstmt.setString(1, patient.getPhoto());
+            pstmt.setString(2, patient.getPhone());
+            pstmt.setString(3, patient.getAddress());
+            pstmt.setString(4, patient.getName());
+            pstmt.setString(5, patient.getNotes());            
+            pstmt.setString(6, patient.getPhoto());
             
             pstmt.execute();
             pstmt.close();

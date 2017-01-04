@@ -23,7 +23,7 @@ public class CaregiverDAO {
 
         try {
             conn = ConnectionManager.getConnection();
-            pstmt = conn.prepareStatement("SELECT phone, name, address, photo from CAREGIVER where CaregiverNRIC = '?'");
+            pstmt = conn.prepareStatement("SELECT phone, name, address, photo from caregiver where CaregiverNRIC = ?");
             pstmt.setString(1, caregiverNRIC);
             rs = pstmt.executeQuery();
             while (rs.next()) {

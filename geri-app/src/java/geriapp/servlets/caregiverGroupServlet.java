@@ -6,6 +6,7 @@ package geriapp.servlets;
  * and open the template in the editor.
  */
 import geriapp.dao.CaregiverDAO;
+import geriapp.dao.CaregiverGroupDAO;
 import geriapp.dao.PatientDAO;
 import geriapp.entity.Caregiver;
 import geriapp.entity.CaregiverGroup;
@@ -49,20 +50,26 @@ public class caregiverGroupServlet extends HttpServlet {
             String patientAddress = request.getParameter("inputPatientAddress");
             String patientPhoto = request.getParameter("inputPatientPhoto");
             String addtionalInformation = request.getParameter("inputPatientInformation");
-            
+
             CaregiverDAO caregiveDao = new CaregiverDAO();
             ArrayList<Caregiver> caregiverList = new ArrayList<Caregiver>();
-            
+
             RequestDispatcher dispatcher = request.getRequestDispatcher("createCaregiverGroup.jsp");
 
             //Checking for blanks fields
             if (patientName != null && patientNric != null && patientPhone != null && patientAddress != null && patientPhoto != null && addtionalInformation != null) {
-
+                System.out.println("hi");
                 //CaregiverList
                 for (int i = 0; i <= 10; i++) {
                     String caregiverName = request.getParameter("fields" + (i + 1));
-                    if (caregiverName != null && !caregiverName.isEmpty()) {                        
-                        caregiverList.add(caregiveDao.getCaregiverById(caregiverName));
+                    if (caregiverName != null && !caregiverName.isEmpty()) {
+                        if (caregiveDao.getCaregiverById(caregiverName) != null) {
+                            caregiverList.add(caregiveDao.getCaregiverById(caregiverName));
+                        } else {
+                            request.setAttribute("errorMsg", "Invalid Caregiver");
+                            dispatcher.forward(request, response);
+                            return;
+                        }
                     }
                 }
 
@@ -73,21 +80,25 @@ public class caregiverGroupServlet extends HttpServlet {
                 } else if (caregiverList.size() < 1) {
                     request.setAttribute("errorMsg", "Kindly assign a caregiver.");
                     dispatcher.forward(request, response);
-                    return;   
+                    return;
                 } else {
                     //Pass the readings into objects then, display information next page
-                    
+
                     //Create Patient and add into database
-                    Patient patient = new Patient (patientName, patientNric, patientPhone, patientAddress, addtionalInformation, patientPhoto);
+                    Patient patient = new Patient(patientName, patientNric, patientPhone, patientAddress, addtionalInformation, patientPhoto);
                     PatientDAO patientDao = new PatientDAO();
                     patientDao.AddPatient(patient);
                     System.out.println("Here");
                     //Create Caregiver Group 
                     CaregiverGroup caregiverGroup = new CaregiverGroup(patient.getNRIC(), caregiverList);
+                    
+                    for(Caregiver caregiver: caregiverList){
+                        CaregiverGroupDAO.addCaregiverToGroup(patient,caregiver);
+                    }                 
                     System.out.println("Here3");
                     System.out.println("Testing");
                     System.out.println(caregiverList.size());
-                    response.sendRedirect("createCaregiverGroup.jsp");
+                    response.sendRedirect("displayCaregiverGroup.jsp");
                     return;
                 }
 

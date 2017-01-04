@@ -85,11 +85,11 @@ public class CaregiverGroupDAO {
 
         try {
             conn = ConnectionManager.getConnection();
-            PreparedStatement ps = conn.prepareStatement("INSERT INTO caregiver_group (groupID, PatientNRIC, CaregiverNRIC) VALUES ('?','?','?')");
-
-            ps.setString(1, "2");
-            ps.setString(2, patient.getNRIC());
-            ps.setString(3, caregiver.getNRIC());
+            PreparedStatement ps = conn.prepareStatement("INSERT INTO caregiver_group (PatientNRIC, CaregiverNRIC) VALUES (?,?)");
+            
+            //ps.setInt(1, 2);
+            ps.setString(1, patient.getNRIC());
+            ps.setString(2, caregiver.getNRIC());
 
             ps.execute();
             ps.close();
