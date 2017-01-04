@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import= "geriapp.entity.Patient"%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -168,20 +169,30 @@
                     </div>
                     <!--END TITLE & BREADCRUMB PAGE-->
                     <!--BEGIN CONTENT-->
+                    <%
+                        Patient patient = (Patient) request.getAttribute("patient");
+                        System.out.println("Display" + patient);
+                    %>
                     <div class="page-content">
                         <div id="tab-general">
-                            <div id="sum_box" class="row mbl">
+                            <div id="sum_box" class="row mbl"> 
                                 <div class="col-md-2 col-lg-2"></div>
                                 <div class="col-md-6 col-lg-8">
                                     <div class="panel panel-grey">
                                         <div class="panel-heading">
-                                            <div class="row">                                                        
-                                                <div class="col-lg-4">
-                                                    <img src="http://www.clacksweb.org.uk/images/icons/elderly.gif" alt="" class="Patient_Img"/></br>                                                                                                      
+                                            <div class="row">
+                                                <div class="col-lg-12 text-center">
+                                                    <div class="form-group">
+                                                        <img src="http://www.clacksweb.org.uk/images/icons/elderly.gif" alt="" class="Patient_Img"/>                                                            
+                                                    </div>                                                    
+                                                        <label name="inputPatientName"><%=patient.getName()%></label>
+                                                        <label name="inputPatientNRIC">(<%=patient.getNRIC()%>)</label><br/>
+                                                        <label name="inputPatientPhone"><%=patient.getPhone()%></label><br/>
+                                                        <label name="inputPatientAddress"><%=patient.getAddress()%></label><br/>
+                                                        <label name="inputPatientNotes"><%=patient.getNotes()%></label><br/>
+                                                        <label name="inputPatientName"><%=patient.getPhoto()%></label><br/>                                                    
                                                 </div>
-                                                <div class="col-lg-4">
-                                                    <label for="inputPatientInformation">WHEY ZHEN HUI</label>
-                                                </div>
+
                                             </div>
                                         </div>
 
@@ -234,17 +245,13 @@
                                                         </div>
                                                     </div>
                                                 </div>
-
                                             </form>
+
                                         </div>
                                     </div>
                                 </div>
-
-
                             </div>
-
                         </div>
-
                     </div>
                     <!--END CONTENT-->
                     <!--BEGIN FOOTER-->

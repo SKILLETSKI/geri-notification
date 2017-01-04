@@ -58,7 +58,7 @@ public class caregiverGroupServlet extends HttpServlet {
 
             //Checking for blanks fields
             if (patientName != null && patientNric != null && patientPhone != null && patientAddress != null && patientPhoto != null && addtionalInformation != null) {
-                System.out.println("hi");
+                //System.out.println("hi");
                 //CaregiverList
                 for (int i = 0; i <= 10; i++) {
                     String caregiverName = request.getParameter("fields" + (i + 1));
@@ -88,17 +88,21 @@ public class caregiverGroupServlet extends HttpServlet {
                     Patient patient = new Patient(patientName, patientNric, patientPhone, patientAddress, addtionalInformation, patientPhoto);
                     PatientDAO patientDao = new PatientDAO();
                     patientDao.AddPatient(patient);
-                    System.out.println("Here");
+                    //System.out.println("Here");
                     //Create Caregiver Group 
                     CaregiverGroup caregiverGroup = new CaregiverGroup(patient.getNRIC(), caregiverList);
                     
                     for(Caregiver caregiver: caregiverList){
                         CaregiverGroupDAO.addCaregiverToGroup(patient,caregiver);
                     }                 
-                    System.out.println("Here3");
-                    System.out.println("Testing");
+                    //System.out.println("Here3");
+                    //System.out.println("Testing");
                     System.out.println(caregiverList.size());
-                    response.sendRedirect("displayCaregiverGroup.jsp");
+                    
+                    RequestDispatcher dispatcherForward = request.getRequestDispatcher("displayCaregiverGroup.jsp");
+                    request.setAttribute("patient", patient);
+                    dispatcherForward.forward(request, response);
+                    //response.sendRedirect("");
                     return;
                 }
 
