@@ -171,78 +171,73 @@
                     <!--BEGIN CONTENT-->
                     <%
                         Patient patient = (Patient) request.getAttribute("patient");
-                        System.out.println("Display" + patient);
-                    %>
+                        //System.out.println("Display" + patient);
+%>
                     <div class="page-content">
                         <div id="tab-general">
-                            <div id="sum_box" class="row mbl"> 
+                            <div class="row mbl"> 
                                 <div class="col-md-2 col-lg-2"></div>
                                 <div class="col-md-6 col-lg-8">
                                     <div class="panel panel-grey">
-                                        <div class="panel-heading">
-                                            <div class="row">
-                                                <div class="col-lg-12 text-center">
-                                                    <div class="form-group">
-                                                        <img src="http://www.clacksweb.org.uk/images/icons/elderly.gif" alt="" class="Patient_Img"/>                                                            
-                                                    </div>                                                    
-                                                        <label name="inputPatientName"><%=patient.getName()%></label>
-                                                        <label name="inputPatientNRIC">(<%=patient.getNRIC()%>)</label><br/>
-                                                        <label name="inputPatientPhone"><%=patient.getPhone()%></label><br/>
-                                                        <label name="inputPatientAddress"><%=patient.getAddress()%></label><br/>
-                                                        <label name="inputPatientNotes"><%=patient.getNotes()%></label><br/>
-                                                        <label name="inputPatientName"><%=patient.getPhoto()%></label><br/>                                                    
+                                        <div class="panel-body">
+                                            <div class="row">                                                
+                                                <div class="col-lg-6">
+                                                    <div class="form-group text-center">
+                                                        <div style="height: 50px"></div>
+                                                        <figure>
+                                                            <img src="http://www.clacksweb.org.uk/images/icons/elderly.gif" style="margin: auto" alt="Patient_Img" class="img-responsive img-circle"/>
+                                                        </figure>
+                                                    </div>
                                                 </div>
-
+                                                <div class="col-lg-6">
+                                                    <h2 name="inputPatientName"><%=patient.getName()%>&nbsp;<strong>TAN</strong></h2>
+                                                    <p> </p></br>
+                                                    <p><i class="fa fa-user"></i>&nbsp; <strong>NRIC: </strong><label name="inputPatientNRIC"><%=patient.getNRIC()%></label></p>
+                                                    <p><i class="fa fa-book"></i>&nbsp; <strong>Phone: </strong><label name="inputPatientPhone"><%=patient.getPhone()%></label></p>
+                                                    <p><i class="fa fa-map-marker"></i>&nbsp; <strong>Address: </strong><label name="inputPatientAddress"><%=patient.getAddress()%></label></p>
+                                                    <p><i class="fa fa-list"></i>&nbsp; <strong>Notes: </strong><label name="inputPatientNotes"><%=patient.getNotes()%></label></p>
+                                                    <!-- <label name="inputPatientName"><%=patient.getPhoto()%></label><br/> -->
+                                                </div>
                                             </div>
                                         </div>
-
-                                        <div class="panel-body pan">
-                                            <form action="caregiverGroupServlet" method ="get" >
+                                        <div class="panel-body pan" style="border-top: 1px solid rgba(0, 0, 0, 0.1)">
+                                            <form action="caregiverGroupServlet" method ="get">
                                                 <div class="form-body pal">
                                                     <div class="row">                                                        
                                                         <div class="col-lg-8">
-                                                            <div class="form-group">
-                                                                <div class="input-icon">
-                                                                    <i class="fa fa-book"></i>
-                                                                    <label name="inputPatientNRIC" class="form-control"/>
-                                                                </div>                                                            
-                                                            </div>                                                            
-                                                            <div class="form-group">
-                                                                <div class="input-icon">
-                                                                    <i class="fa fa-list"></i>
-                                                                    <label name="inputPatientInformation" class="form-control"/>
-                                                                </div>                                                            
+                                                            <div class="portlet box">
+                                                                <div class="portlet-header">
+                                                                    <div class="caption">Active Rules</div>
+                                                                </div>
+                                                                <div class="portlet-body">
+
+                                                                </div>
                                                             </div>
-                                                            <div class="form-group">
-                                                                <div class="input-icon">
-                                                                    <i class="fa fa-ambulance"></i>
-                                                                    <label name="inputCaregivers" class="form-control"/>
-                                                                </div> 
-                                                            </div>
-                                                            <div class="form-group"> 
-                                                                <button type="submit" class="btn btn-block btn-primary">Create Group</button>                                                                
+                                                            <div class="portlet box">
+                                                                <div class="portlet-header">
+                                                                    <div class="caption">Caregiver-In-Charge</div>
+                                                                </div>
+                                                                <div class="portlet-body">
+
+                                                                </div>
                                                             </div>
                                                         </div>
                                                         <div class="col-lg-4">
-                                                            <div class="form-group">
-                                                                <div class="text-center mbl"><img src="http://www.clacksweb.org.uk/images/icons/elderly.gif" alt="" class="Patient_Img"/></div>
-                                                                <div class="text-center mbl"><a href="#" class="btn btn-success"><i class="fa fa-plus"></i>&nbsp; Add New Rule</a></div>
+                                                            <div class="panel">
+                                                                <div class="panel-body">
+                                                                    <div class="form-group">
+                                                                        <h4 class="mbs mbs text-center">Profile Setting</h4>
+                                                                    </div>
+                                                                    <div class="text-center mbl"><a href="#" class="btn btn-warning btn-block"><i class="fa fa-pencil"></i>&nbsp; Edit</a></div>
+                                                                    
+                                                                    <div class="form-group" style="border-top: 1px solid rgba(0, 0, 0, 0.1)">
+                                                                        <br/>
+                                                                        <h4 class="mbs mbs text-center">Add a New Rule</h4>
+                                                                    </div>
+                                                                    <div class="text-center mbl"><a href="#" class="btn btn-success btn-block"><i class="fa fa-plus"></i>&nbsp; Add Rule</a></div>
+                                                                </div>
                                                             </div>
                                                         </div>                                          
-                                                    </div>
-                                                    <div class="row"> 
-                                                        <div class="col-lg-4">
-                                                            <div class="form-group">
-                                                                <label name="inputCaregivers" class="form-control"/>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-lg-4">
-                                                            <div class="col-lg-4">
-                                                                <div class="form-group">
-                                                                    <label name="inputCaregivers" class="form-control"/>
-                                                                </div>
-                                                            </div> 
-                                                        </div>
                                                     </div>
                                                 </div>
                                             </form>
