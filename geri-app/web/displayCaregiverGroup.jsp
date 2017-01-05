@@ -5,10 +5,12 @@
 --%>
 
 
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import= "geriapp.entity.Patient"%>
+<%@page import="geriapp.entity.Patient"%>
 <%@page import="geriapp.entity.Event"%>
-<%@include file="java.util.*"%>
+<%@page import="geriapp.dao.EventDAO"%>
+<%@ page import="java.util.ArrayList" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -175,9 +177,12 @@
                     <!--BEGIN CONTENT-->
                     <%
                         Patient patient = (Patient) request.getAttribute("patient");
-                        ArrayList<Event> eventList = (ArrayList<Event>) request.getAttribute("event");
+                        EventDAO eventDao = new EventDAO();
+
+                        ArrayList<Event> eventList = (ArrayList<Event>) request.getAttribute("eventList");
+                        //eventDao.getEventByPatientNRIC(patient.getNRIC());                        
                         //System.out.println("Display" + patient);
-%>
+                    %>
                     <div class="page-content">
                         <div id="tab-general">
                             <div class="row mbl"> 
@@ -216,6 +221,21 @@
                                                                 </div>
                                                                 <div class="portlet-body">
 
+                                                                    <%
+                                                                        if (eventList != null) {
+                                                                            
+                                                                            for (Event event : eventList) {
+                                                                                out.println("<div class='row emphasis'>");
+                                                                                out.println("<h2><strong>" + event.getEventId() + "</strong></h2>");
+                                                                                out.println("<p>" + event.getCurrentVal() + "</p>");
+                                                                                out.println("<p>" + event.getEventType() + "</p>");
+                                                                                out.println("</div>");
+                                                                            }
+                                                                        }else {
+                                                                            out.println("<p> No Rule <p/>");
+                                                                        }
+                                                                    %>
+
                                                                 </div>
                                                             </div>
                                                             <div class="portlet box">
@@ -234,12 +254,12 @@
                                                                         <h4 class="mbs mbs text-center">Profile Setting</h4>
                                                                     </div>
                                                                     <div class="text-center mbl"><a href="#" class="btn btn-warning btn-block"><i class="fa fa-pencil"></i>&nbsp; Edit</a></div>
-                                                                    
+
                                                                     <div class="form-group" style="border-top: 1px solid rgba(0, 0, 0, 0.1)">
                                                                         <br/>
                                                                         <h4 class="mbs mbs text-center">Add a New Rule</h4>
                                                                     </div>
-                                                                    <div class="text-center mbl"><a href="#" class="btn btn-success btn-block"><i class="fa fa-plus"></i>&nbsp; Add Rule</a></div>
+                                                                    <div class="text-center mbl"><a href="hometemp.jsp" class="btn btn-success btn-block"><i class="fa fa-plus"></i>&nbsp; Add Rule</a></div>
                                                                 </div>
                                                             </div>
                                                         </div>                                          
