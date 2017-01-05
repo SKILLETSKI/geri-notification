@@ -4,8 +4,12 @@
     Author     : ASUS
 --%>
 
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import= "geriapp.entity.Patient"%>
+<%@page import="geriapp.entity.Event"%>
+<%@include file="java.util.*"%>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -171,6 +175,7 @@
                     <!--BEGIN CONTENT-->
                     <%
                         Patient patient = (Patient) request.getAttribute("patient");
+                        ArrayList<Event> eventList = (ArrayList<Event>) request.getAttribute("event");
                         //System.out.println("Display" + patient);
 %>
                     <div class="page-content">

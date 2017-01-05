@@ -7,9 +7,11 @@ package geriapp.servlets;
  */
 import geriapp.dao.CaregiverDAO;
 import geriapp.dao.CaregiverGroupDAO;
+import geriapp.dao.EventDAO;
 import geriapp.dao.PatientDAO;
 import geriapp.entity.Caregiver;
 import geriapp.entity.CaregiverGroup;
+import geriapp.entity.Event;
 import geriapp.entity.Patient;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -87,6 +89,8 @@ public class caregiverGroupServlet extends HttpServlet {
                     //Create Patient and add into database
                     Patient patient = new Patient(patientName, patientNric, patientPhone, patientAddress, addtionalInformation, patientPhoto);
                     PatientDAO patientDao = new PatientDAO();
+                    EventDAO eventDao = new EventDAO();
+                    ArrayList<Event> eventList = eventDao.getEventByPatientNRIC(patient.getNRIC());
                     patientDao.AddPatient(patient);
                     //System.out.println("Here");
                     //Create Caregiver Group 
@@ -101,6 +105,7 @@ public class caregiverGroupServlet extends HttpServlet {
                     
                     RequestDispatcher dispatcherForward = request.getRequestDispatcher("displayCaregiverGroup.jsp");
                     request.setAttribute("patient", patient);
+                    request.setAttribute("eventList", eventList);
                     dispatcherForward.forward(request, response);
                     //response.sendRedirect("");
                     return;

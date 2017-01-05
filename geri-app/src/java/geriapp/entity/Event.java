@@ -5,59 +5,53 @@
  */
 package geriapp.entity;
 
-import java.util.ArrayList;
 
 /**
  *
  * @author muhammadims.2013
  */
 public class Event {
+    private int eventId;
+    private String patientId;
+    private int currentVal;
+    private String eventType;
     
-    //private ArrayList<String[]> conditions;
+    public Event(int eventId, String patientId, int currentVal, String eventType){
+    	this.eventId = eventId;
+    	this.patientId = patientId;
+    	this.currentVal = currentVal;
+    	this.eventType = eventType;
+    }
     
-    	private String EventID;
-	private String PatientNRIC;
-	private String currentval;
-	private String eventtype;
-
-    public Event(String EventID, String PatientNRIC, String currentval, String eventtype) {
-        this.EventID = EventID;
-        this.PatientNRIC = PatientNRIC;
-        this.currentval = currentval;
-        this.eventtype = eventtype;
+    public int getEventId(){
+    	return this.eventId;
     }
-
-    public String getEventID() {
-        return EventID;
+    
+    public void setEventId(int eventId){
+    	this.eventId = eventId;
     }
-
-    public void setEventID(String EventID) {
-        this.EventID = EventID;
+    
+    public String getPatientId(){
+    	return this.patientId;
     }
-
-    public String getPatientNRIC() {
-        return PatientNRIC;
+    
+    public void setPatientId(String patientId){
+    	this.patientId = patientId;
     }
-
-    public void setPatientNRIC(String PatientNRIC) {
-        this.PatientNRIC = PatientNRIC;
+    
+    public int getCurrentVal(){
+    	return this.currentVal;
     }
-
-    public String getCurrentval() {
-        return currentval;
+    
+    public void setCurrentVal(int currentVal){
+    	this.currentVal = currentVal;
     }
-
-    public void setCurrentval(String currentval) {
-        this.currentval = currentval;
+    
+    public String getEventType(){
+    	return this.eventType;
     }
-
-    public String getEventtype() {
-        return eventtype;
+    
+    public void setEventType(String eventType){
+    	this.eventType = eventType;
     }
-
-    public void setEventtype(String eventtype) {
-        this.eventtype = eventtype;
-    }
-        
-        
 }
